@@ -26,7 +26,7 @@ export const logIn = async (nick: string, password: string): Promise<void> => {
 		console.warn('login err', err);
 		deleteStorage();
 		deleteUserInfo();
-		throw new Error(err?.message ?? 'Login Err');
+		// throw new Error(err?.message ?? 'Login Err');
 	}
 };
 
