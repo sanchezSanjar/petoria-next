@@ -28,6 +28,37 @@ const tokenRefreshLink = new TokenRefreshLink({
 	},
 });
 
+// Custom WebSocket client
+class LoggingWebSocket {
+	private socket: WebSocket;
+
+	constructor(url: string) {
+		this.socket = new WebSocket(url);
+
+		this.socket.onopen = () => {
+			console.log("WebSocket connection!");
+		};
+
+		this.socket.onmessage = (msg) => {
+			console.log("Websocket message:", msg.data);
+		};
+
+		this.socket.onerror = (error) => {
+			console.log("Websocket message:", error);
+		};
+	}
+
+	// same type as WebSocket.send; a hand-written union breaks with newer TypeScript DOM typings
+	send(data: Parameters<WebSocket['send']>[0]) {
+		this.socket.send(data);
+	}
+
+	close() {
+		this.socket.close();
+	}
+}
+
+
 function createIsomorphicLink() {
 	if (typeof window !== 'undefined') {
 		const authLink = new ApolloLink((operation, forward) => {
@@ -60,6 +91,7 @@ function createIsomorphicLink() {
 					return { headers: getHeaders() };
 				},
 			},
+			webSocketImpl: LoggingWebSocket
 		});
 
 		const errorLink = onError(({ graphQLErrors, networkError, response }) => {
