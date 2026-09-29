@@ -7,6 +7,7 @@ import { onError } from '@apollo/client/link/error';
 import { getJwtToken } from '../libs/auth';
 import { TokenRefreshLink } from 'apollo-link-token-refresh';
 import { sweetErrorAlert } from '../libs/sweetAlert';
+import { socketVar } from './store';
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 
 function getHeaders() {
@@ -33,7 +34,8 @@ class LoggingWebSocket {
 	private socket: WebSocket;
 
 	constructor(url: string) {
-		this.socket = new WebSocket(url);
+		this.socket = new WebSocket(`${url}?token=${getJwtToken()}`);
+		socketVar(this.socket);
 
 		this.socket.onopen = () => {
 			console.log("WebSocket connection!");
@@ -44,7 +46,7 @@ class LoggingWebSocket {
 		};
 
 		this.socket.onerror = (error) => {
-			console.log("Websocket message:", error);
+			console.log("Websocket error:", error);
 		};
 	}
 
@@ -83,8 +85,7 @@ function createIsomorphicLink() {
 		const wsLink = new WebSocketLink({
 			uri: process.env.REACT_APP_API_WS ?? 'ws://127.0.0.1:3007',
 			options: {
-				// the API has no GraphQL subscriptions yet: connect only if one is actually used
-				lazy: true,
+				// not lazy: no GraphQL subscription ever runs, so a lazy link would never create the chat socket (socketVar)
 				reconnect: false,
 				timeout: 30000,
 				connectionParams: () => {
@@ -94,16 +95,18 @@ function createIsomorphicLink() {
 			webSocketImpl: LoggingWebSocket
 		});
 
-		const errorLink = onError(({ graphQLErrors, networkError, response }) => {
+		const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
 			if (graphQLErrors) {
-				graphQLErrors.map(({ message, locations, path, extensions }) => {
+				// Mutations are awaited inside try/catch by their callers, which already show the error;
+				// alerting here as well produced two popups. Only query errors have no other place to surface.
+				const definition = getMainDefinition(operation.query);
+				const isQuery = definition.kind === 'OperationDefinition' && definition.operation === 'query';
+				graphQLErrors.forEach(({ message, locations, path }) => {
 					console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`);
-					if(!message.includes("input")) {
+					if (isQuery && !message.includes('input')) {
 						sweetErrorAlert(message);
 					}
-				}
-					
-				);
+				});
 			}
 			if (networkError) console.log(`[Network error]: ${networkError}`);
 			// @ts-ignore
