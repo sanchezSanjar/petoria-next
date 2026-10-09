@@ -123,8 +123,13 @@ const TuiEditor = () => {
 
 	return (
 		<Stack>
-			<Stack direction="row" style={{ margin: '40px' }} justifyContent="space-evenly">
-				<Box component={'div'} className={'form_row'} style={{ width: '300px' }}>
+			<Stack
+				// category + title side by side from md up, stacked full width on phones and tablets
+				direction={{ xs: 'column', md: 'row' }}
+				sx={{ margin: { xs: '16px', md: '40px' }, gap: { xs: '16px', md: 0 } }}
+				justifyContent="space-evenly"
+			>
+				<Box component={'div'} className={'form_row'} sx={{ width: { xs: '100%', md: '300px' } }}>
 					<Typography style={{ color: '#7f838d', margin: '10px' }} variant="h3">
 						{t('Category')}
 					</Typography>
@@ -144,7 +149,7 @@ const TuiEditor = () => {
 						</Select>
 					</FormControl>
 				</Box>
-				<Box component={'div'} style={{ width: '300px', flexDirection: 'column' }}>
+				<Box component={'div'} sx={{ width: { xs: '100%', md: '300px' }, flexDirection: 'column' }}>
 					<Typography style={{ color: '#7f838d', margin: '10px' }} variant="h3">
 						{t('Title')}
 					</Typography>
@@ -152,7 +157,7 @@ const TuiEditor = () => {
 						onChange={articleTitleHandler}
 						id="filled-basic"
 						label={t('Type Title')}
-						style={{ width: '300px', background: 'white' }}
+						style={{ width: '100%', background: 'white' }}
 					/>
 				</Box>
 			</Stack>
