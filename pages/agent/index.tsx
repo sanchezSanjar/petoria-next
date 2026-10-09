@@ -13,7 +13,7 @@ import { Member } from '../../libs/types/member/member';
 import { GET_AGENTS } from '../../apollo/user/query';
 import { useMutation, useQuery } from '@apollo/client';
 import { T } from '../../libs/types/common';
-import { LIKE_TARGET_MEMBER, LIKE_TARGET_PROPERTY } from '../../apollo/user/mutation';
+import { LIKE_TARGET_MEMBER, LIKE_TARGET_PRODUCT } from '../../apollo/user/mutation';
 import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../libs/sweetAlert';
 import { Message } from '../../libs/enums/common.enum';
 
@@ -84,7 +84,7 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 
 			await sweetTopSmallSuccessAlert("success", 800);
 		} catch (err: any) {
-			console.log("ERROR, likePropertyHandler", err.message);
+			console.log("ERROR, likeProductHandler", err.message);
 			sweetMixinErrorAlert(err.message).then();
 		}
 	}

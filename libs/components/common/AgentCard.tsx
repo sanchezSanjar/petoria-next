@@ -46,7 +46,7 @@ const AgentCard = (props: AgentCardProps) => {
 							backgroundRepeat: 'no-repeat',
 						}}
 					>
-						<div>{t('{{count}} properties', { count: agent?.memberProperties ?? 0 })}</div>
+						<div>{t('{{count}} properties', { count: agent?.memberProducts ?? 0 })}</div>
 					</Box>
 				</Link>
 

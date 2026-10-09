@@ -82,7 +82,7 @@ const Top = () => {
 
 	useEffect(() => {
 		switch (router.pathname) {
-			case '/property/detail':
+			case '/product/detail':
 				setBgColor(true);
 				break;
 			default:
@@ -149,7 +149,7 @@ const Top = () => {
 				<Link href={'/'}>
 					<div>{t('Home')}</div>
 				</Link>
-				<Link href={'/property'}>
+				<Link href={'/product'}>
 					<div>{t('Properties')}</div>
 				</Link>
 				<Link href={'/agent'}>
@@ -177,7 +177,7 @@ const Top = () => {
 							<Link href={'/'}>
 								<div>{t('Home')}</div>
 							</Link>
-							<Link href={'/property'}>
+							<Link href={'/product'}>
 								<div>{t('Properties')}</div>
 							</Link>
 							<Link href={'/agent'}>

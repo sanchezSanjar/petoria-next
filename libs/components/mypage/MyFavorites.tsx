@@ -3,11 +3,11 @@ import { useTranslation } from 'next-i18next';
 import { NextPage } from 'next';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import { Pagination, Stack, Typography } from '@mui/material';
-import PropertyCard from '../property/PropertyCard';
-import { Property } from '../../types/property/property';
+import ProductCard from '../product/ProductCard';
+import { Product } from '../../types/product/product';
 import { T } from '../../types/common';
 import { useMutation, useQuery } from '@apollo/client';
-import { LIKE_TARGET_PROPERTY } from '../../../apollo/user/mutation';
+import { LIKE_TARGET_PRODUCT } from '../../../apollo/user/mutation';
 import { GET_FAVORITES } from '../../../apollo/user/query';
 import { sweetMixinErrorAlert } from '../../sweetAlert';
 import { Messages } from '../../config';
@@ -15,13 +15,13 @@ import { Messages } from '../../config';
 const MyFavorites: NextPage = () => {
 	const device = useDeviceDetect();
 	const { t } = useTranslation('common');
-	const [myFavorites, setMyFavorites] = useState<Property[]>([]);
+	const [myFavorites, setMyFavorites] = useState<Product[]>([]);
 	const [total, setTotal] = useState<number>(0);
 	const [searchFavorites, setSearchFavorites] = useState<T>({ page: 1, limit: 6 });
 
 	/** APOLLO REQUESTS **/
 	/*** APOLLO REQUESTS ***/
-	const [likeTargetProperty] = useMutation(LIKE_TARGET_PROPERTY);
+	const [likeTargetProduct] = useMutation(LIKE_TARGET_PRODUCT);
 
 	const {
 		loading: getFavoritesLoading,
@@ -45,12 +45,12 @@ const MyFavorites: NextPage = () => {
 		setSearchFavorites({ ...searchFavorites, page: value });
 	};
 
-	const likePropertyHandler = async (user: any, id: string) => {
+	const likeProductHandler = async (user: any, id: string) => {
 		try {
 		  if (!id) return;
 		  if (!user._id) throw new Error(Messages.error2);
 	  
-		  await likeTargetProperty({
+		  await likeTargetProduct({
 			variables: {
 			  input: id,
 			},
@@ -58,7 +58,7 @@ const MyFavorites: NextPage = () => {
 	  
 		  await getFavoritesRefetch({ input: searchFavorites });
 		} catch (err: any) {
-		  console.log('ERROR, likePropertyHandler:', err.message);
+		  console.log('ERROR, likeProductHandler:', err.message);
 		  sweetMixinErrorAlert(err.message).then();
 		}
 	  };
@@ -76,8 +76,8 @@ const MyFavorites: NextPage = () => {
 				</Stack>
 				<Stack className="favorites-list-box">
 					{myFavorites?.length ? (
-						myFavorites?.map((property: Property) => {
-							return <PropertyCard property={property} myFavorites={true} likePropertyHandler={likePropertyHandler} key={property?._id} />;
+						myFavorites?.map((product: Product) => {
+							return <ProductCard product={product} myFavorites={true} likeProductHandler={likeProductHandler} key={product?._id} />;
 						})
 					) : (
 						<div className={'no-data'}>
