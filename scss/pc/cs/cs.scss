@@ -225,3 +225,40 @@
     }
   }
 }
+
+/** FAQ answers wrap instead of running off the line (UI phase F) **/
+#pc-wrap .cs-page .container .cs-content .faq-content .wrap .answer {
+  white-space: normal;
+  align-items: flex-start;
+  @include mobile {
+    margin-left: 0;
+    .badge {
+      margin: 0 $space-3 0 0;
+    }
+  }
+}
+#pc-wrap .cs-page .container .cs-content .faq-content .wrap .question {
+  @include mobile {
+    .badge {
+      margin: 0 $space-3 0 0;
+    }
+  }
+}
+
+// FAQ categories: seven tabs at 14% each overlap on phones; let them scroll sideways instead
+#pc-wrap .cs-page .container .cs-content .faq-content .categories {
+  @include mobile {
+    justify-content: flex-start;
+    gap: $space-4;
+    overflow-x: auto;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    div {
+      flex-shrink: 0;
+      width: auto;
+      white-space: nowrap;
+    }
+  }
+}
