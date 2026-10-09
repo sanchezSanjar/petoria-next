@@ -31,48 +31,53 @@ const withLayoutBasic = (Component: any) => {
 				case '/product':
 					title = 'Product Search';
 					desc = 'We are glad to see you again!';
-					bgImage = '/img/banner/properties.png';
+					bgImage = '/img/banner/products.jpg';
 					break;
 				case '/agent':
 					title = 'Sellers';
 					desc = 'Home / Petoria';
-					bgImage = '/img/banner/agents.webp';
+					bgImage = '/img/banner/sellers.jpg';
 					break;
 				case '/agent/detail':
 					title = 'Seller Page';
 					desc = 'Home / Petoria';
-					bgImage = '/img/banner/header2.svg';
+					bgImage = '/img/banner/page-banner.jpg';
 					break;
 				case '/mypage':
 					title = 'my page';
 					desc = 'Home / Petoria';
-					bgImage = '/img/banner/header1.svg';
+					bgImage = '/img/banner/home-hero.jpg';
 					break;
 				case '/community':
 					title = 'Community';
 					desc = 'Home / Petoria';
-					bgImage = '/img/banner/header2.svg';
+					bgImage = '/img/banner/page-banner.jpg';
 					break;
 				case '/community/detail':
 					title = 'Community Detail';
 					desc = 'Home / Petoria';
-					bgImage = '/img/banner/header2.svg';
+					bgImage = '/img/banner/page-banner.jpg';
 					break;
 				case '/cs':
 					title = 'CS';
 					desc = 'We are glad to see you again!';
-					bgImage = '/img/banner/header2.svg';
+					bgImage = '/img/banner/page-banner.jpg';
 					break;
 				case '/account/join':
 					title = 'Login/Signup';
 					desc = 'Authentication Process';
-					bgImage = '/img/banner/header2.svg';
+					bgImage = '/img/banner/page-banner.jpg';
 					setAuthHeader(true);
+					break;
+				case '/about':
+					title = 'About Petoria';
+					desc = 'Home / Petoria';
+					bgImage = '/img/banner/page-banner.jpg';
 					break;
 				case '/member':
 					title = 'Member Page';
 					desc = 'Home / Petoria';
-					bgImage = '/img/banner/header1.svg';
+					bgImage = '/img/banner/home-hero.jpg';
 					break;
 				default:
 					break;
@@ -128,6 +133,7 @@ const withLayoutBasic = (Component: any) => {
 							style={{
 								backgroundImage: `url(${memoizedValues.bgImage})`,
 								backgroundSize: 'cover',
+								backgroundPosition: 'center',
 								boxShadow: 'inset 10px 40px 150px 40px rgb(24 22 36)',
 							}}
 						>

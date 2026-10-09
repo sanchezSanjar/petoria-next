@@ -27,7 +27,7 @@ const ProductCard = (props: ProductCardType) => {
 	const user = useReactiveVar(userVar);
 	const imagePath: string = product?.productImages[0]
 		? `${REACT_APP_API_URL}/${product?.productImages[0]}`
-		: '/img/banner/header1.svg';
+		: '/img/banner/home-hero.jpg';
 	const isSold = product?.productStatus === ProductStatus.SOLD;
 
 	return (

@@ -279,7 +279,7 @@ const ProductDetail: NextPage = ({ initialComment, ...props }: any) => {
 						<Stack className={'images'}>
 							<Stack className={'main-image'}>
 								<img
-									src={slideImage ? `${REACT_APP_API_URL}/${slideImage}` : '/img/property/bigImage.png'}
+									src={slideImage ? `${REACT_APP_API_URL}/${slideImage}` : '/img/pets/product-placeholder.jpg'}
 									alt={'main-image'}
 								/>
 							</Stack>

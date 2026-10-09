@@ -4,6 +4,7 @@ import { NextPage } from 'next';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import { Stack, Box } from '@mui/material';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { ProductLocation, ProductSpecies, ProductType } from '../../libs/enums/product.enum';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -13,6 +14,12 @@ export const getStaticProps = async ({ locale }: any) => ({
 
 const About: NextPage = () => {
 	const { t } = useTranslation('common');
+	// real catalogue facts instead of made-up numbers
+	const facts = [
+		{ value: Object.values(ProductType).length, label: 'Product types' },
+		{ value: Object.values(ProductSpecies).length, label: 'Species' },
+		{ value: Object.values(ProductLocation).length, label: 'Cities' },
+	];
 
 	return (
 		<Stack className={'about-page'}>
@@ -23,14 +30,14 @@ const About: NextPage = () => {
 					</Stack>
 					<Stack className={'right'}>
 						<p>
-							It doesn’t matter how organized you are — a surplus of toys will always ensure your house is a mess
-							waiting to happen. Fortunately, getting kids on board with the idea of ditching their stuff is a lot
-							easier than it sounds.
+							{t(
+								'Petoria is a marketplace for pets and everything they need. Registered sellers list dogs, cats, birds and fish, together with food, toys and accessories, so you can find a new friend and its supplies in one place.',
+							)}
 							<br />
 							<br />
-							Maecenas quis viverra metus, et efficitur ligula. Nam congue augue et ex congue, sed luctus lectus
-							congue. Integer convallis condimentum sem. Duis elementum tortor eget condimentum tempor. Praesent
-							sollicitudin lectus ut pharetra pulvinar.
+							{t(
+								'Every listing shows the species, gender and city, with real photos and the seller’s contact. Compare, save your favorites and talk to the seller before you decide.',
+							)}
 						</p>
 						<Stack className={'boxes'}>
 							<div className={'box'}>
@@ -38,14 +45,14 @@ const About: NextPage = () => {
 									<img src="/img/icons/garden.svg" alt="" />
 								</div>
 								<span>{t('Healthy Pets')}</span>
-								<p>Nullam sollicitudin blandit Nullam maximus.</p>
+								<p>{t('Listings from registered sellers, with species, gender and photos.')}</p>
 							</div>
 							<div className={'box'}>
 								<div>
 									<img src="/img/icons/securePayment.svg" alt="" />
 								</div>
-								<span>{t('Secure Payment')}</span>
-								<p>Nullam sollicitudin blandit Nullam maximus.</p>
+								<span>{t('Trusted Sellers')}</span>
+								<p>{t('Every listing shows who sells it, with a profile and a contact number.')}</p>
 							</div>
 						</Stack>
 					</Stack>
@@ -54,28 +61,22 @@ const About: NextPage = () => {
 			<Stack className={'statistics'}>
 				<Stack className={'container'}>
 					<Stack className={'banner'}>
-						<img src="/img/banner/header1.svg" alt="" />
+						<img src="/img/banner/home-hero.jpg" alt="" />
 					</Stack>
 					<Stack className={'info'}>
-						<Box component={'div'}>
-							<strong>4M</strong>
-							<p>{t('Award Winning')}</p>
-						</Box>
-						<Box component={'div'}>
-							<strong>12K</strong>
-							<p>{t('Products Ready')}</p>
-						</Box>
-						<Box component={'div'}>
-							<strong>20M</strong>
-							<p>{t('Happy Customer')}</p>
-						</Box>
+						{facts.map((fact) => (
+							<Box component={'div'} key={fact.label}>
+								<strong>{fact.value}</strong>
+								<p>{t(fact.label)}</p>
+							</Box>
+						))}
 					</Stack>
 				</Stack>
 			</Stack>
 			<Stack className={'agents'}>
 				<Stack className={'container'}>
 					<span className={'title'}>{t('Our Exclusive Sellers')}</span>
-					<p className={'desc'}>Aliquam lacinia diam quis lacus euismod</p>
+					<p className={'desc'}>{t('Meet the people who list pets and products on Petoria')}</p>
 					<Stack className={'wrap'}>
 						{/*{[1, 2, 3, 4, 5].map(() => {*/}
 						{/*	return <AgentCard />;*/}
@@ -84,16 +85,16 @@ const About: NextPage = () => {
 				</Stack>
 			</Stack>
 			<Stack className={'options'}>
-				<img src="/img/banner/aboutBanner.svg" alt="" className={'about-banner'} />
+				<img src="/img/banner/about.jpg" alt="" className={'about-banner'} />
 				<Stack className={'container'}>
-					<strong>{t('Let’s find the right selling option for you')}</strong>
+					<strong>{t('Sell your pets and products on Petoria')}</strong>
 					<Stack>
 						<div className={'icon-box'}>
 							<img src="/img/icons/security.svg" alt="" />
 						</div>
 						<div className={'text-box'}>
-							<span>{t('Pet Care Services')}</span>
-							<p>Nullam sollicitudin blandit eros eu pretium. Nullam maximus ultricies auctor.</p>
+							<span>{t('List in minutes')}</span>
+							<p>{t('Add photos, type, species, gender and price from My Page.')}</p>
 						</div>
 					</Stack>
 					<Stack>
@@ -101,8 +102,8 @@ const About: NextPage = () => {
 							<img src="/img/icons/keywording.svg" alt="" />
 						</div>
 						<div className={'text_-box'}>
-							<span>{t('Pet Care Services')}</span>
-							<p>Nullam sollicitudin blandit eros eu pretium. Nullam maximus ultricies auctor.</p>
+							<span>{t('Reach pet lovers')}</span>
+							<p>{t('Buyers find your listings by type, species and city.')}</p>
 						</div>
 					</Stack>
 					<Stack>
@@ -110,8 +111,8 @@ const About: NextPage = () => {
 							<img src="/img/icons/investment.svg" alt="" />
 						</div>
 						<div className={'text-box'}>
-							<span>{t('Pet Care Services')}</span>
-							<p>Nullam sollicitudin blandit eros eu pretium. Nullam maximus ultricies auctor.</p>
+							<span>{t('Manage your listings')}</span>
+							<p>{t('Edit listings, mark items as sold and follow their views and likes.')}</p>
 						</div>
 					</Stack>
 					<Stack className={'btn'}>
@@ -122,13 +123,13 @@ const About: NextPage = () => {
 			</Stack>
 			<Stack className={'partners'}>
 				<Stack className={'container'}>
-					<span>{t("Trusted bu the world's best")}</span>
+					<span>{t('Pets we care for')}</span>
 					<Stack className={'wrap'}>
-						<img src="/img/icons/brands/amazon.svg" alt="" />
-						<img src="/img/icons/brands/amd.svg" alt="" />
-						<img src="/img/icons/brands/cisco.svg" alt="" />
-						<img src="/img/icons/brands/dropcam.svg" alt="" />
-						<img src="/img/icons/brands/spotify.svg" alt="" />
+						{Object.values(ProductSpecies).map((species) => (
+							<span className={'species-chip'} key={species}>
+								{t(species)}
+							</span>
+						))}
 					</Stack>
 				</Stack>
 			</Stack>
@@ -145,7 +146,7 @@ const About: NextPage = () => {
 						</div>
 						<div className={'black'}>
 							<img src="/img/icons/call.svg" alt="" />
-							920 851 9087
+							+82 10 4867 2909
 						</div>
 					</Box>
 				</Stack>

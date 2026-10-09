@@ -185,8 +185,11 @@ body::-webkit-scrollbar {
 		position: relative;
 		width: 100%;
 		height: 860px;
-		background-image: url('/img/banner/header1.svg');
+		// dark wash keeps the white navbar and gallery readable over a bright photo
+		background-image: linear-gradient(180deg, rgba(24, 26, 32, 0.72) 0%, rgba(24, 26, 32, 0.35) 45%, rgba(24, 26, 32, 0.55) 100%),
+			url('/img/banner/home-hero.jpg');
 		background-size: cover;
+		background-position: center;
 		.container {
 			position: relative;
 			margin-top: 20px;

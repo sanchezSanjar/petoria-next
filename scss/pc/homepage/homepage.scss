@@ -972,3 +972,70 @@
 		}
 	}
 }
+
+/** homepage promo band (Advertisement.tsx): slow zoom + caption **/
+@keyframes petoria-ken-burns {
+	from {
+		transform: scale(1);
+	}
+	to {
+		transform: scale(1.08);
+	}
+}
+#pc-wrap .video-frame {
+	position: relative;
+	overflow: hidden;
+	.ad-image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transform-origin: 60% 45%;
+		animation: petoria-ken-burns 18s ease-in-out infinite alternate;
+	}
+	.ad-caption {
+		position: absolute;
+		left: max(#{$space-4}, calc((100% - #{$container-width}) / 2));
+		right: $space-4;
+		bottom: $space-7;
+		display: flex;
+		flex-direction: column;
+		gap: $space-2;
+		color: $color-white;
+		font-family: $font;
+		text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+		strong {
+			font-size: 40px;
+			font-weight: 700;
+			line-height: 1.15;
+		}
+		span {
+			font-size: $fs-md;
+			opacity: 0.92;
+		}
+		@include mobile {
+			bottom: $space-5;
+			strong {
+				font-size: 24px;
+			}
+			span {
+				font-size: $fs-sm;
+			}
+		}
+	}
+	// soft dark gradient at the bottom keeps the caption readable on any photo
+	&::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(180deg, transparent 45%, rgba(24, 26, 32, 0.6));
+		pointer-events: none;
+	}
+	.ad-caption {
+		z-index: 1;
+	}
+	@include reduced-motion {
+		.ad-image {
+			animation: none;
+		}
+	}
+}

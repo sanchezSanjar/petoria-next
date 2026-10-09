@@ -93,6 +93,9 @@
           height: 500px;
           img {
             width: 100%;
+            // fill the 500px box instead of growing past it onto the numbers below
+            height: 100%;
+            object-fit: cover;
             border-radius: 12px;
           }
         }
@@ -426,5 +429,22 @@
         }
       }
     }
+  }
+}
+
+// "Pets we care for": species as chips (replaces the third-party brand logos)
+#pc-wrap .about-page .partners .container .wrap {
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: $space-4;
+  .species-chip {
+    padding: 12px 28px;
+    border-radius: 999px;
+    border: 1px solid $color-border;
+    background: $color-white;
+    color: $color-text;
+    font-family: $font;
+    font-size: $fs-lg;
+    font-weight: 600;
   }
 }

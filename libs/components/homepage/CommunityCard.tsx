@@ -16,7 +16,7 @@ const CommunityCard = (props: CommunityCardProps) => {
 	const { t } = useTranslation('common');
 	const articleImage = article?.articleImage
 		? `${process.env.REACT_APP_API_URL}/${article?.articleImage}`
-		: '/img/event.svg';
+		: '/img/pets/event.jpg';
 
 	if (vertical) {
 		return (
