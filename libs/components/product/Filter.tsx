@@ -189,12 +189,15 @@ const Filter = (props: FilterType) => {
 						{ scroll: false },
 					);
 				} else if (searchFilter?.search?.typeList?.includes(value)) {
+					// gender only applies to pets: unchecking Pet also clears the gender filter
+					const { genderList, ...searchWithoutGender } = searchFilter.search;
+					const search = value === ProductType.PET ? searchWithoutGender : searchFilter.search;
 					await router.push(
 						`/product?input=${JSON.stringify({
 							...searchFilter,
 							page: 1,
 							search: {
-								...searchFilter.search,
+								...search,
 								typeList: searchFilter?.search?.typeList?.filter((item: string) => item !== value),
 							},
 						})}`,
@@ -202,7 +205,7 @@ const Filter = (props: FilterType) => {
 							...searchFilter,
 							page: 1,
 							search: {
-								...searchFilter.search,
+								...search,
 								typeList: searchFilter?.search?.typeList?.filter((item: string) => item !== value),
 							},
 						})}`,
@@ -442,25 +445,28 @@ const Filter = (props: FilterType) => {
 						</Stack>
 					))}
 				</Stack>
-				<Stack className={'find-your-home'} mb={'30px'}>
-					<Typography className={'title'}>{t('Gender')}</Typography>
-					{productGender.map((item: string) => (
-						<Stack className={'input-box'} key={item}>
-							<Checkbox
-								id={item}
-								className="product-checkbox"
-								color="default"
-								size="small"
-								value={item}
-								onChange={(e: any) => productListSelectHandler(e, 'genderList')}
-								checked={(searchFilter?.search?.genderList || []).includes(item as ProductGender)}
-							/>
-							<label htmlFor={item} style={{ cursor: 'pointer' }}>
-								<Typography className="product_type">{t(item)}</Typography>
-							</label>
-						</Stack>
-					))}
-				</Stack>
+				{/* gender only applies to pets */}
+				{(searchFilter?.search?.typeList || []).includes(ProductType.PET) && (
+					<Stack className={'find-your-home'} mb={'30px'}>
+						<Typography className={'title'}>{t('Gender')}</Typography>
+						{productGender.map((item: string) => (
+							<Stack className={'input-box'} key={item}>
+								<Checkbox
+									id={item}
+									className="product-checkbox"
+									color="default"
+									size="small"
+									value={item}
+									onChange={(e: any) => productListSelectHandler(e, 'genderList')}
+									checked={(searchFilter?.search?.genderList || []).includes(item as ProductGender)}
+								/>
+								<label htmlFor={item} style={{ cursor: 'pointer' }}>
+									<Typography className="product_type">{t(item)}</Typography>
+								</label>
+							</Stack>
+						))}
+					</Stack>
+				)}
 				<Stack className={'find-your-home'}>
 					<Typography className={'title'}>{t('Price Range')}</Typography>
 					<Stack className="square-year-input">
