@@ -3,7 +3,6 @@ import { useTranslation } from 'next-i18next';
 import { NextPage } from 'next';
 import { Box, Button, Menu, MenuItem, Pagination, Stack, Typography } from '@mui/material';
 import ProductCard from '../../libs/components/product/ProductCard';
-import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import Filter from '../../libs/components/product/Filter';
 import { useRouter } from 'next/router';
@@ -11,6 +10,7 @@ import { ProductsInquiry } from '../../libs/types/product/product.input';
 import { Product } from '../../libs/types/product/product';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
+import TuneRoundedIcon from '@mui/icons-material/TuneRounded';
 import { Direction,Message  } from '../../libs/enums/common.enum';
 import { T } from '../../libs/types/common';
 import { GET_PRODUCTS } from '../../apollo/user/query';
@@ -34,7 +34,6 @@ const parseInput = (input: unknown) => {
 };
 
 const ProductList: NextPage = ({ initialInput, ...props }: any) => {
-	const device = useDeviceDetect();
 	const { t } = useTranslation('common');
 	const router = useRouter();
 	const [searchFilter, setSearchFilter] = useState<ProductsInquiry>(parseInput(router?.query?.input) ?? initialInput);
@@ -44,6 +43,7 @@ const ProductList: NextPage = ({ initialInput, ...props }: any) => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const [sortingOpen, setSortingOpen] = useState(false);
 	const [filterSortName, setFilterSortName] = useState('New');
+	const [showFilter, setShowFilter] = useState<boolean>(false);
 
 	/** APOLLO REQUESTS **/
 	const [likeTargetProduct] = useMutation(LIKE_TARGET_PRODUCT);
@@ -131,91 +131,91 @@ const ProductList: NextPage = ({ initialInput, ...props }: any) => {
 		setAnchorEl(null);
 	};
 
-	if (device === 'mobile') {
-		return <h1>PRODUCTS MOBILE</h1>;
-	} else {
-		return (
-			<div id="product-list-page" style={{ position: 'relative' }}>
-				<div className="container">
-					<Box component={'div'} className={'right'}>
-						<span>{t('Sort by')}</span>
-						<div>
-							<Button onClick={sortingClickHandler} endIcon={<KeyboardArrowDownRoundedIcon />}>
-								{t(filterSortName)}
+	return (
+		<div id="product-list-page" style={{ position: 'relative' }}>
+			<div className="container">
+				<Stack className={'product-page'}>
+					<Stack className={`filter-config ${showFilter ? 'open' : ''}`}>
+						{/* @ts-ignore */}
+						<Filter searchFilter={searchFilter} setSearchFilter={setSearchFilter} initialInput={initialInput} />
+					</Stack>
+					<Stack className="main-config" mb={'76px'}>
+						<Stack className={'toolbar'}>
+							{/* the filter panel is a sidebar on desktop and opens from here on tablets and phones */}
+							<Button
+								className={'filter-toggle'}
+								startIcon={<TuneRoundedIcon />}
+								onClick={() => setShowFilter((prev) => !prev)}
+								aria-expanded={showFilter}
+							>
+								{t('Filters')}
 							</Button>
-							<Menu anchorEl={anchorEl} open={sortingOpen} onClose={sortingCloseHandler} sx={{ paddingTop: '5px' }}>
-								<MenuItem
-									onClick={sortingHandler}
-									id={'new'}
-									disableRipple
-									sx={{ boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px' }}
-								>
-									{t('New')}
-								</MenuItem>
-								<MenuItem
-									onClick={sortingHandler}
-									id={'lowest'}
-									disableRipple
-									sx={{ boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px' }}
-								>
-									{t('Lowest Price')}
-								</MenuItem>
-								<MenuItem
-									onClick={sortingHandler}
-									id={'highest'}
-									disableRipple
-									sx={{ boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px' }}
-								>
-									{t('Highest Price')}
-								</MenuItem>
-							</Menu>
-						</div>
-					</Box>
-					<Stack className={'product-page'}>
-						<Stack className={'filter-config'}>
-							{/* @ts-ignore */}
-							<Filter searchFilter={searchFilter} setSearchFilter={setSearchFilter} initialInput={initialInput} />
+							<Typography className={'result-count'}>
+								{t('Total {{count}} products available', { count: total })}
+							</Typography>
+							<Box component={'div'} className={'sort'}>
+								<span>{t('Sort by')}</span>
+								<Button onClick={sortingClickHandler} endIcon={<KeyboardArrowDownRoundedIcon />}>
+									{t(filterSortName)}
+								</Button>
+								<Menu anchorEl={anchorEl} open={sortingOpen} onClose={sortingCloseHandler} sx={{ paddingTop: '5px' }}>
+									<MenuItem
+										onClick={sortingHandler}
+										id={'new'}
+										disableRipple
+										sx={{ boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px' }}
+									>
+										{t('New')}
+									</MenuItem>
+									<MenuItem
+										onClick={sortingHandler}
+										id={'lowest'}
+										disableRipple
+										sx={{ boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px' }}
+									>
+										{t('Lowest Price')}
+									</MenuItem>
+									<MenuItem
+										onClick={sortingHandler}
+										id={'highest'}
+										disableRipple
+										sx={{ boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px' }}
+									>
+										{t('Highest Price')}
+									</MenuItem>
+								</Menu>
+							</Box>
 						</Stack>
-						<Stack className="main-config" mb={'76px'}>
-							<Stack className={'list-config'}>
-								{products?.length === 0 ? (
-									<div className={'no-data'}>
-										<img src="/img/icons/icoAlert.svg" alt="" />
-										<p>{t('No Products found!')}</p>
-									</div>
-								) : (
-									products.map((product: Product) => {
-										return <ProductCard likeProductHandler={likeProductHandler} product={product} key={product?._id} />;
-									})
-								)}
-							</Stack>
-							<Stack className="pagination-config">
-								{products.length !== 0 && (
-									<Stack className="pagination-box">
-										<Pagination
-											page={currentPage}
-											count={Math.ceil(total / searchFilter.limit)}
-											onChange={handlePaginationChange}
-											shape="circular"
-											color="primary"
-										/>
-									</Stack>
-								)}
-
-								{products.length !== 0 && (
-									<Stack className="total-result">
-										<Typography>
-											{t('Total {{count}} products available', { count: total })}
-										</Typography>
-									</Stack>
-								)}
-							</Stack>
+						<Stack className={'list-config'}>
+							{products?.length === 0 ? (
+								<div className={'no-data'}>
+									<img src="/img/icons/icoAlert.svg" alt="" />
+									<p>{t('No Products found!')}</p>
+								</div>
+							) : (
+								products.map((product: Product) => {
+									return <ProductCard likeProductHandler={likeProductHandler} product={product} key={product?._id} />;
+								})
+							)}
+						</Stack>
+						<Stack className="pagination-config">
+							{products.length !== 0 && (
+								<Stack className="pagination-box">
+									<Pagination
+										page={currentPage}
+										count={Math.ceil(total / searchFilter.limit)}
+										onChange={handlePaginationChange}
+										shape="circular"
+										color="primary"
+									/>
+								</Stack>
+							)}
 						</Stack>
 					</Stack>
-				</div>
+				</Stack>
 			</div>
-		);
-	}
+		</div>
+	);
 };
 
 ProductList.defaultProps = {

@@ -8,7 +8,6 @@ import {
 	Tooltip,
 	IconButton,
 } from '@mui/material';
-import useDeviceDetect from '../../hooks/useDeviceDetect';
 import { ProductGender, ProductLocation, ProductSpecies, ProductType } from '../../enums/product.enum';
 import { ProductsInquiry } from '../../types/product/product.input';
 import { useRouter } from 'next/router';
@@ -23,7 +22,6 @@ interface FilterType {
 
 const Filter = (props: FilterType) => {
 	const { searchFilter, setSearchFilter, initialInput } = props;
-	const device = useDeviceDetect();
 	const { t } = useTranslation('common');
 	const router = useRouter();
 	const [productLocation, setProductLocation] = useState<ProductLocation[]>(Object.values(ProductLocation));
@@ -328,107 +326,125 @@ const Filter = (props: FilterType) => {
 		}
 	};
 
-	if (device === 'mobile') {
-		return <div>PRODUCTS FILTER</div>;
-	} else {
-		return (
-			<Stack className={'filter-main'}>
-				<Stack className={'find-your-home'} mb={'40px'}>
-					<Typography className={'title-main'}>{t('Find Your Pet')}</Typography>
-					<Stack className={'input-box'}>
-						<OutlinedInput
-							value={searchText}
-							type={'text'}
-							className={'search-input'}
-							placeholder={t('What are you looking for?')}
-							onChange={(e: any) => setSearchText(e.target.value)}
-							onKeyDown={(event: any) => {
-								if (event.key == 'Enter') {
-									const updatedFilter = { ...searchFilter, page: 1, search: { ...searchFilter.search, text: searchText } };
-									router.push(`/product?input=${JSON.stringify(updatedFilter)}`, `/product?input=${JSON.stringify(updatedFilter)}`, {
-										scroll: false,
-									});
-								}
-							}}
-							endAdornment={
-								<>
-									<CancelRoundedIcon
-										onClick={() => {
-											setSearchText('');
-											const { text, ...search } = searchFilter.search;
-											const updatedFilter = { ...searchFilter, page: 1, search };
-											router.push(`/product?input=${JSON.stringify(updatedFilter)}`, `/product?input=${JSON.stringify(updatedFilter)}`, {
-												scroll: false,
-											});
-										}}
-									/>
-								</>
-							}
-						/>
-						<img src={'/img/icons/search_icon.png'} alt={''} />
-						<Tooltip title={t('Reset')}>
-							<IconButton onClick={refreshHandler}>
-								<RefreshIcon />
-							</IconButton>
-						</Tooltip>
-					</Stack>
-				</Stack>
-				<Stack className={'find-your-home'} mb={'30px'}>
-					<p className={'title'} style={{ textShadow: '0px 3px 4px #b9b9b9' }}>
-						{t('Location')}
-					</p>
-					<Stack
-						className={`product-location`}
-						style={{ height: showMore ? '253px' : '115px' }}
-						onMouseEnter={() => setShowMore(true)}
-						onMouseLeave={() => {
-							if (!searchFilter?.search?.locationList) {
-								setShowMore(false);
+	return (
+		<Stack className={'filter-main'}>
+			<Stack className={'find-your-home'} mb={'40px'}>
+				<Typography className={'title-main'}>{t('Find Your Pet')}</Typography>
+				<Stack className={'input-box'}>
+					<OutlinedInput
+						value={searchText}
+						type={'text'}
+						className={'search-input'}
+						placeholder={t('What are you looking for?')}
+						onChange={(e: any) => setSearchText(e.target.value)}
+						onKeyDown={(event: any) => {
+							if (event.key == 'Enter') {
+								const updatedFilter = { ...searchFilter, page: 1, search: { ...searchFilter.search, text: searchText } };
+								router.push(`/product?input=${JSON.stringify(updatedFilter)}`, `/product?input=${JSON.stringify(updatedFilter)}`, {
+									scroll: false,
+								});
 							}
 						}}
-					>
-						{productLocation.map((location: string) => {
-							return (
-								<Stack className={'input-box'} key={location}>
-									<Checkbox
-										id={location}
-										className="product-checkbox"
-										color="default"
-										size="small"
-										value={location}
-										checked={(searchFilter?.search?.locationList || []).includes(location as ProductLocation)}
-										onChange={productLocationSelectHandler}
-									/>
-									<label htmlFor={location} style={{ cursor: 'pointer' }}>
-										<Typography className="product-type">{t(location)}</Typography>
-									</label>
-								</Stack>
-							);
-						})}
+						endAdornment={
+							<>
+								<CancelRoundedIcon
+									onClick={() => {
+										setSearchText('');
+										const { text, ...search } = searchFilter.search;
+										const updatedFilter = { ...searchFilter, page: 1, search };
+										router.push(`/product?input=${JSON.stringify(updatedFilter)}`, `/product?input=${JSON.stringify(updatedFilter)}`, {
+											scroll: false,
+										});
+									}}
+								/>
+							</>
+						}
+					/>
+					<img src={'/img/icons/search_icon.png'} alt={''} />
+					<Tooltip title={t('Reset')}>
+						<IconButton onClick={refreshHandler}>
+							<RefreshIcon />
+						</IconButton>
+					</Tooltip>
+				</Stack>
+			</Stack>
+			<Stack className={'find-your-home'} mb={'30px'}>
+				<p className={'title'} style={{ textShadow: '0px 3px 4px #b9b9b9' }}>
+					{t('Location')}
+				</p>
+				<Stack
+					className={`product-location`}
+					style={{ height: showMore ? '253px' : '115px' }}
+					onMouseEnter={() => setShowMore(true)}
+					onMouseLeave={() => {
+						if (!searchFilter?.search?.locationList) {
+							setShowMore(false);
+						}
+					}}
+				>
+					{productLocation.map((location: string) => {
+						return (
+							<Stack className={'input-box'} key={location}>
+								<Checkbox
+									id={location}
+									className="product-checkbox"
+									color="default"
+									size="small"
+									value={location}
+									checked={(searchFilter?.search?.locationList || []).includes(location as ProductLocation)}
+									onChange={productLocationSelectHandler}
+								/>
+								<label htmlFor={location} style={{ cursor: 'pointer' }}>
+									<Typography className="product-type">{t(location)}</Typography>
+								</label>
+							</Stack>
+						);
+					})}
+				</Stack>
+			</Stack>
+			<Stack className={'find-your-home'} mb={'30px'}>
+				<Typography className={'title'}>{t('Product Type')}</Typography>
+				{productType.map((type: string) => (
+					<Stack className={'input-box'} key={type}>
+						<Checkbox
+							id={type}
+							className="product-checkbox"
+							color="default"
+							size="small"
+							value={type}
+							onChange={productTypeSelectHandler}
+							checked={(searchFilter?.search?.typeList || []).includes(type as ProductType)}
+						/>
+						<label style={{ cursor: 'pointer' }}>
+							<Typography className="product_type">{t(type)}</Typography>
+						</label>
 					</Stack>
-				</Stack>
+				))}
+			</Stack>
+			<Stack className={'find-your-home'} mb={'30px'}>
+				<Typography className={'title'}>{t('Species')}</Typography>
+				{productSpecies.map((item: string) => (
+					<Stack className={'input-box'} key={item}>
+						<Checkbox
+							id={item}
+							className="product-checkbox"
+							color="default"
+							size="small"
+							value={item}
+							onChange={(e: any) => productListSelectHandler(e, 'speciesList')}
+							checked={(searchFilter?.search?.speciesList || []).includes(item as ProductSpecies)}
+						/>
+						<label htmlFor={item} style={{ cursor: 'pointer' }}>
+							<Typography className="product_type">{t(item)}</Typography>
+						</label>
+					</Stack>
+				))}
+			</Stack>
+			{/* gender only applies to pets */}
+			{(searchFilter?.search?.typeList || []).includes(ProductType.PET) && (
 				<Stack className={'find-your-home'} mb={'30px'}>
-					<Typography className={'title'}>{t('Product Type')}</Typography>
-					{productType.map((type: string) => (
-						<Stack className={'input-box'} key={type}>
-							<Checkbox
-								id={type}
-								className="product-checkbox"
-								color="default"
-								size="small"
-								value={type}
-								onChange={productTypeSelectHandler}
-								checked={(searchFilter?.search?.typeList || []).includes(type as ProductType)}
-							/>
-							<label style={{ cursor: 'pointer' }}>
-								<Typography className="product_type">{t(type)}</Typography>
-							</label>
-						</Stack>
-					))}
-				</Stack>
-				<Stack className={'find-your-home'} mb={'30px'}>
-					<Typography className={'title'}>{t('Species')}</Typography>
-					{productSpecies.map((item: string) => (
+					<Typography className={'title'}>{t('Gender')}</Typography>
+					{productGender.map((item: string) => (
 						<Stack className={'input-box'} key={item}>
 							<Checkbox
 								id={item}
@@ -436,8 +452,8 @@ const Filter = (props: FilterType) => {
 								color="default"
 								size="small"
 								value={item}
-								onChange={(e: any) => productListSelectHandler(e, 'speciesList')}
-								checked={(searchFilter?.search?.speciesList || []).includes(item as ProductSpecies)}
+								onChange={(e: any) => productListSelectHandler(e, 'genderList')}
+								checked={(searchFilter?.search?.genderList || []).includes(item as ProductGender)}
 							/>
 							<label htmlFor={item} style={{ cursor: 'pointer' }}>
 								<Typography className="product_type">{t(item)}</Typography>
@@ -445,58 +461,36 @@ const Filter = (props: FilterType) => {
 						</Stack>
 					))}
 				</Stack>
-				{/* gender only applies to pets */}
-				{(searchFilter?.search?.typeList || []).includes(ProductType.PET) && (
-					<Stack className={'find-your-home'} mb={'30px'}>
-						<Typography className={'title'}>{t('Gender')}</Typography>
-						{productGender.map((item: string) => (
-							<Stack className={'input-box'} key={item}>
-								<Checkbox
-									id={item}
-									className="product-checkbox"
-									color="default"
-									size="small"
-									value={item}
-									onChange={(e: any) => productListSelectHandler(e, 'genderList')}
-									checked={(searchFilter?.search?.genderList || []).includes(item as ProductGender)}
-								/>
-								<label htmlFor={item} style={{ cursor: 'pointer' }}>
-									<Typography className="product_type">{t(item)}</Typography>
-								</label>
-							</Stack>
-						))}
-					</Stack>
-				)}
-				<Stack className={'find-your-home'}>
-					<Typography className={'title'}>{t('Price Range')}</Typography>
-					<Stack className="square-year-input">
-						<input
-							type="number"
-							placeholder={t('$ min')}
-							min={0}
-							value={priceInput.start}
-							onChange={(e: any) => {
-								if (e.target.value === '' || e.target.value >= 0) {
-									setPriceInput({ ...priceInput, start: e.target.value });
-								}
-							}}
-						/>
-						<div className="central-divider"></div>
-						<input
-							type="number"
-							placeholder={t('$ max')}
-							value={priceInput.end}
-							onChange={(e: any) => {
-								if (e.target.value === '' || e.target.value >= 0) {
-									setPriceInput({ ...priceInput, end: e.target.value });
-								}
-							}}
-						/>
-					</Stack>
+			)}
+			<Stack className={'find-your-home'}>
+				<Typography className={'title'}>{t('Price Range')}</Typography>
+				<Stack className="square-year-input">
+					<input
+						type="number"
+						placeholder={t('$ min')}
+						min={0}
+						value={priceInput.start}
+						onChange={(e: any) => {
+							if (e.target.value === '' || e.target.value >= 0) {
+								setPriceInput({ ...priceInput, start: e.target.value });
+							}
+						}}
+					/>
+					<div className="central-divider"></div>
+					<input
+						type="number"
+						placeholder={t('$ max')}
+						value={priceInput.end}
+						onChange={(e: any) => {
+							if (e.target.value === '' || e.target.value >= 0) {
+								setPriceInput({ ...priceInput, end: e.target.value });
+							}
+						}}
+					/>
 				</Stack>
 			</Stack>
-		);
-	}
+		</Stack>
+	);
 };
 
 export default Filter;
