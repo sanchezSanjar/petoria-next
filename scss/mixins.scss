@@ -1,0 +1,29 @@
+/** MIXINS: responsive breakpoints (values in variables.scss) **/
+
+// below the 1300px desktop container
+@mixin laptop {
+	@media (max-width: $bp-laptop) {
+		@content;
+	}
+}
+
+// tablets and small laptops
+@mixin tablet {
+	@media (max-width: $bp-tablet) {
+		@content;
+	}
+}
+
+// phones
+@mixin mobile {
+	@media (max-width: $bp-mobile) {
+		@content;
+	}
+}
+
+// visitors who asked the OS for less motion
+@mixin reduced-motion {
+	@media (prefers-reduced-motion: reduce) {
+		@content;
+	}
+}

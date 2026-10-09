@@ -3,3 +3,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 $font: 'Poppins', sans-serif;
+
+/** COLORS (values already used across scss/pc) **/
+$color-text: #181a20;
+$color-muted: #717171;
+$color-accent: #eb6753;
+$color-border: #ddd;
+$color-border-light: #eee;
+$color-bg-soft: #f6f6f6;
+$color-white: #fff;
+
+/** TYPE SCALE **/
+$fs-xs: 12px;
+$fs-sm: 13px;
+$fs-base: 14px;
+$fs-md: 16px;
+$fs-lg: 20px;
+$fs-xl: 30px;
+
+/** SPACING SCALE **/
+$space-1: 4px;
+$space-2: 8px;
+$space-3: 12px;
+$space-4: 16px;
+$space-5: 24px;
+$space-6: 32px;
+$space-7: 48px;
+
+/** LAYOUT **/
+$container-width: 1300px;
+$radius: 12px;
+
+/** BREAKPOINTS (max-width, used by scss/mixins.scss) **/
+$bp-mobile: 767px;
+$bp-tablet: 1023px;
+$bp-laptop: 1299px;

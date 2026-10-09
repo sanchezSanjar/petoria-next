@@ -1,5 +1,6 @@
 /** IMPORTS **/
 @import 'variables.scss';
+@import 'mixins.scss';
 @import 'reset.scss';
 
 a {
@@ -54,8 +55,15 @@ hr {
 
 	.container {
 		position: relative;
-		width: 1300px;
+		width: $container-width;
+		max-width: 100%;
 		margin: 0 auto;
 		display: flex;
+
+		// below the desktop width the container follows the screen instead of scrolling sideways
+		@include laptop {
+			padding: 0 $space-4;
+			box-sizing: border-box;
+		}
 	}
 }
