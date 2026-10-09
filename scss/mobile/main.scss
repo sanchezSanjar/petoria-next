@@ -1,7 +1,8 @@
 @import '/scss/variables.scss';
 @import '/scss/mixins.scss';
 
-#mobile-wrap {
+// phones render the same #pc-wrap as desktop, with the .mobile class (see the layouts)
+#pc-wrap.mobile {
   .top {
     height: 100px;
     display: flex;

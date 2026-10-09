@@ -34,7 +34,7 @@ const withLayoutFull = (Component: any) => {
 						<title>Petoria</title>
 						<meta name={'title'} content={`Petoria`} />
 					</Head>
-					<Stack id="mobile-wrap">
+					<Stack id="pc-wrap" className={'mobile'}>
 						<Stack id={'top'}>
 							<Top />
 						</Stack>
