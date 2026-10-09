@@ -58,6 +58,9 @@ const StyledMenu = styled((props: MenuProps) => (
 	},
 }));
 
+// the navbar entrance animation plays once per page load, not again on every client-side navigation
+let navIntroPlayed = false;
+
 const Top = () => {
 	const device = useDeviceDetect();
 	const user = useReactiveVar(userVar);
@@ -72,8 +75,23 @@ const Top = () => {
 	const [bgColor, setBgColor] = useState<boolean>(false);
 	const [logoutAnchor, setLogoutAnchor] = React.useState<null | HTMLElement>(null);
 	const logoutOpen = Boolean(logoutAnchor);
+	const [playIntro] = useState<boolean>(!navIntroPlayed);
+
+	// desktop menu; My Page only for logged-in members
+	const navItems = [
+		{ href: '/', label: 'Home', isActive: (path: string) => path === '/' },
+		{ href: '/product', label: 'Products', isActive: (path: string) => path.startsWith('/product') },
+		{ href: '/agent', label: 'Sellers', isActive: (path: string) => path.startsWith('/agent') },
+		{ href: '/community?articleCategory=FREE', label: 'Community', isActive: (path: string) => path.startsWith('/community') },
+		...(user?._id ? [{ href: '/mypage', label: 'My Page', isActive: (path: string) => path.startsWith('/mypage') }] : []),
+		{ href: '/cs', label: 'CS', isActive: (path: string) => path.startsWith('/cs') },
+	];
 
 	/** LIFECYCLES **/
+	useEffect(() => {
+		navIntroPlayed = true;
+	}, []);
+
 	useEffect(() => {
 		// show the flag of the language the page is actually in (direct links / bookmarks included)
 		const locale = router.locale ?? 'en';
@@ -182,7 +200,7 @@ const Top = () => {
 	} else {
 		return (
 			<Stack className={'navbar'}>
-				<Stack className={`navbar-main ${colorChange ? 'transparent' : ''} ${bgColor ? 'transparent' : ''}`}>
+				<Stack className={`navbar-main ${colorChange ? 'transparent scrolled' : ''} ${bgColor ? 'transparent' : ''} ${playIntro ? 'intro' : ''}`}>
 					<Stack className={'container'}>
 						<Box component={'div'} className={'logo-box'}>
 							<Link href={'/'}>
@@ -190,26 +208,21 @@ const Top = () => {
 							</Link>
 						</Box>
 						<Box component={'div'} className={'router-box'}>
-							<Link href={'/'}>
-								<div>{t('Home')}</div>
-							</Link>
-							<Link href={'/product'}>
-								<div>{t('Products')}</div>
-							</Link>
-							<Link href={'/agent'}>
-								<div> {t('Sellers')} </div>
-							</Link>
-							<Link href={'/community?articleCategory=FREE'}>
-								<div> {t('Community')} </div>
-							</Link>
-							{user?._id && (
-								<Link href={'/mypage'}>
-									<div> {t('My Page')} </div>
-								</Link>
-							)}
-							<Link href={'/cs'}>
-								<div> {t('CS')} </div>
-							</Link>
+							{navItems.map((item, index) => {
+								const active = item.isActive(router.pathname);
+								return (
+									<Link
+										href={item.href}
+										key={item.href}
+										className={active ? 'nav-link active' : 'nav-link'}
+										aria-current={active ? 'page' : undefined}
+										// position in the entrance stagger (scss/pc/main.scss, navbar animation)
+										style={{ '--i': index } as React.CSSProperties}
+									>
+										<div>{t(item.label)}</div>
+									</Link>
+								);
+							})}
 						</Box>
 						<Box component={'div'} className={'user-box'}>
 							{user?._id ? (
