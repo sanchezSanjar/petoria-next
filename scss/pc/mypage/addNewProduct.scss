@@ -587,3 +587,28 @@
 		}
 	}
 }
+
+/** add / edit product form: responsive (UI phase F) **/
+#pc-wrap #my-page #add-product-page {
+	@include tablet {
+		gap: $space-5;
+		.config {
+			padding: $space-5 $space-4;
+			box-sizing: border-box;
+			.description-box .config-row {
+				gap: $space-5;
+			}
+		}
+	}
+	@include mobile {
+		.config .description-box .config-row {
+			// one field per line on phones
+			flex-direction: column;
+			gap: $space-4;
+		}
+		.config .description-box .buttons-row {
+			flex-wrap: wrap;
+			gap: $space-3;
+		}
+	}
+}

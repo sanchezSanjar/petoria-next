@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { NextPage } from 'next';
 import { Pagination, Stack, Typography } from '@mui/material';
-import useDeviceDetect from '../../hooks/useDeviceDetect';
 import { ProductCard } from './ProductCard';
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import { Product } from '../../types/product/product';
@@ -16,7 +15,6 @@ import { GET_AGENT_PRODUCTS } from '../../../apollo/user/query';
 import { sweetConfirmAlert, sweetErrorHandling } from '../../sweetAlert';
 
 const MyProducts: NextPage = ({ initialInput, ...props }: any) => {
-	const device = useDeviceDetect();
 	const { t } = useTranslation('common');
 	const [searchFilter, setSearchFilter] = useState<AgentProductsInquiry>(initialInput);
 	const [agentProducts, setAgentProducts] = useState<Product[]>([]);
@@ -98,79 +96,75 @@ const MyProducts: NextPage = ({ initialInput, ...props }: any) => {
 		if (user?._id && user.memberType !== 'AGENT') router.back();
 	}, [user?._id, user?.memberType]);
 
-	if (device === 'mobile') {
-		return <div>PETORIA PRODUCTS MOBILE</div>;
-	} else {
-		return (
-			<div id="my-product-page">
-				<Stack className="main-title-box">
-					<Stack className="right-box">
-						<Typography className="main-title">{t('My Products')}</Typography>
-						<Typography className="sub-title">{t('We are glad to see you again!')}</Typography>
-					</Stack>
+	return (
+		<div id="my-product-page">
+			<Stack className="main-title-box">
+				<Stack className="right-box">
+					<Typography className="main-title">{t('My Products')}</Typography>
+					<Typography className="sub-title">{t('We are glad to see you again!')}</Typography>
 				</Stack>
-				<Stack className="product-list-box">
-					<Stack className="tab-name-box">
-						<Typography
-							onClick={() => changeStatusHandler(ProductStatus.ACTIVE)}
-							className={searchFilter.search.productStatus === 'ACTIVE' ? 'active-tab-name' : 'tab-name'}
-						>
-							{t('On Sale')}
-						</Typography>
-						<Typography
-							onClick={() => changeStatusHandler(ProductStatus.SOLD)}
-							className={searchFilter.search.productStatus === 'SOLD' ? 'active-tab-name' : 'tab-name'}
-						>
-							{t('On Sold')}
-						</Typography>
+			</Stack>
+			<Stack className="product-list-box">
+				<Stack className="tab-name-box">
+					<Typography
+						onClick={() => changeStatusHandler(ProductStatus.ACTIVE)}
+						className={searchFilter.search.productStatus === 'ACTIVE' ? 'active-tab-name' : 'tab-name'}
+					>
+						{t('On Sale')}
+					</Typography>
+					<Typography
+						onClick={() => changeStatusHandler(ProductStatus.SOLD)}
+						className={searchFilter.search.productStatus === 'SOLD' ? 'active-tab-name' : 'tab-name'}
+					>
+						{t('On Sold')}
+					</Typography>
+				</Stack>
+				<Stack className="list-box">
+					<Stack className="listing-title-box">
+						<Typography className="title-text">{t('Listing title')}</Typography>
+						<Typography className="title-text">{t('Date Published')}</Typography>
+						<Typography className="title-text">{t('Status')}</Typography>
+						<Typography className="title-text">{t('View')}</Typography>
+						{searchFilter.search.productStatus === 'ACTIVE' && <Typography className="title-text">{t('Action')}</Typography>}
 					</Stack>
-					<Stack className="list-box">
-						<Stack className="listing-title-box">
-							<Typography className="title-text">{t('Listing title')}</Typography>
-							<Typography className="title-text">{t('Date Published')}</Typography>
-							<Typography className="title-text">{t('Status')}</Typography>
-							<Typography className="title-text">{t('View')}</Typography>
-							{searchFilter.search.productStatus === 'ACTIVE' && <Typography className="title-text">{t('Action')}</Typography>}
-						</Stack>
 
-						{agentProducts?.length === 0 ? (
-							<div className={'no-data'}>
-								<img src="/img/icons/icoAlert.svg" alt="" />
-								<p>{t('No Product found!')}</p>
-							</div>
-						) : (
-							agentProducts.map((product: Product) => {
-								return (
-									<ProductCard
-										product={product}
-										deleteProductHandler={deleteProductHandler}
-										updateProductHandler={updateProductHandler}
-									/>
-								);
-							})
-						)}
+					{agentProducts?.length === 0 ? (
+						<div className={'no-data'}>
+							<img src="/img/icons/icoAlert.svg" alt="" />
+							<p>{t('No Product found!')}</p>
+						</div>
+					) : (
+						agentProducts.map((product: Product) => {
+							return (
+								<ProductCard
+									product={product}
+									deleteProductHandler={deleteProductHandler}
+									updateProductHandler={updateProductHandler}
+								/>
+							);
+						})
+					)}
 
-						{agentProducts.length !== 0 && (
-							<Stack className="pagination-config">
-								<Stack className="pagination-box">
-									<Pagination
-										count={Math.ceil(total / searchFilter.limit)}
-										page={searchFilter.page}
-										shape="circular"
-										color="primary"
-										onChange={paginationHandler}
-									/>
-								</Stack>
-								<Stack className="total-result">
-									<Typography>{t('{{count}} products available', { count: total })}</Typography>
-								</Stack>
+					{agentProducts.length !== 0 && (
+						<Stack className="pagination-config">
+							<Stack className="pagination-box">
+								<Pagination
+									count={Math.ceil(total / searchFilter.limit)}
+									page={searchFilter.page}
+									shape="circular"
+									color="primary"
+									onChange={paginationHandler}
+								/>
 							</Stack>
-						)}
-					</Stack>
+							<Stack className="total-result">
+								<Typography>{t('{{count}} products available', { count: total })}</Typography>
+							</Stack>
+						</Stack>
+					)}
 				</Stack>
-			</div>
-		);
-	}
+			</Stack>
+		</div>
+	);
 };
 
 MyProducts.defaultProps = {

@@ -960,3 +960,18 @@
     }
   }
 }
+
+// phones: the header is not fixed and there is no page banner, so the desktop top offsets are just blank space
+#pc-wrap.mobile {
+  #product-detail-page {
+    padding-top: 0;
+  }
+  #my-page .container .my-page,
+  #member-page .container .member-page {
+    padding-top: 0;
+  }
+  #community-list-page .container,
+  #community-detail-page .container {
+    padding-top: $space-4;
+  }
+}

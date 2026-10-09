@@ -252,3 +252,108 @@
 		}
 	}
 }
+
+/** my products list: responsive (UI phase F) **/
+#pc-wrap #my-page #my-product-page {
+	.main-title-box .right-box {
+		max-width: 100%;
+	}
+	.list-box {
+		box-sizing: border-box;
+	}
+	@include laptop {
+		.list-box {
+			padding: $space-5 $space-4;
+			.listing-title-box {
+				gap: $space-6;
+				:first-child {
+					margin-right: $space-7;
+				}
+			}
+			.product-card-box {
+				gap: $space-3;
+				.information-box {
+					flex: 1;
+					min-width: 0;
+					width: auto;
+				}
+				.date-box {
+					width: 110px;
+				}
+			}
+		}
+	}
+	@include tablet {
+		gap: $space-6;
+		.list-box {
+			min-height: 0;
+			// column titles do not fit; each row becomes a compact card instead
+			.listing-title-box {
+				display: none;
+			}
+			.product-card-box {
+				flex-wrap: wrap;
+				align-items: center;
+				row-gap: $space-3;
+				margin-top: $space-5;
+				padding-bottom: $space-5;
+				.image-box {
+					width: 90px;
+				}
+				.information-box {
+					flex: 1 1 160px;
+				}
+				.date-box,
+				.status-box,
+				.views-box {
+					width: auto;
+				}
+				.action-box {
+					margin-left: auto;
+				}
+			}
+		}
+	}
+	@include mobile {
+		.product-list-box .tab-name-box {
+			flex-wrap: wrap;
+		}
+		.list-box {
+			padding: $space-4 $space-3;
+			.product-card-box .date-box {
+				flex-basis: 100%;
+			}
+		}
+	}
+}
+
+// rows wrap on tablets/phones: the desktop column margins (25-75px) would pull them apart
+#pc-wrap #my-page #my-product-page .list-box .product-card-box {
+	@include tablet {
+		.image-box,
+		.date-box,
+		.status-box,
+		.views-box {
+			margin-right: 0;
+		}
+		.image-box {
+			margin-right: $space-3;
+		}
+		.information-box .name,
+		.information-box .address {
+			margin-bottom: $space-1;
+		}
+		// the desktop table gives these boxes a 180px height; as wrapped lines they only need their content height
+		.date-box,
+		.status-box,
+		.views-box,
+		.action-box {
+			height: auto;
+		}
+		// status + actions directly under the product, date last
+		.date-box {
+			order: 5;
+			justify-content: flex-start;
+		}
+	}
+}
