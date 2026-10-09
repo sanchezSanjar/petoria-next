@@ -38,6 +38,10 @@ const withLayoutMain = (Component: any) => {
 						<Stack id={'top'}>
 							<Top />
 						</Stack>
+						{/* phones have no 3D hero; the product search sits right under the header */}
+						<Stack className={'mobile-search'}>
+							<HeaderFilter />
+						</Stack>
 
 						<Stack id={'main'}>
 							<Component {...props} />

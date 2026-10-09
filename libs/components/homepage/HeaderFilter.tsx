@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Stack, Box } from '@mui/material';
-import useDeviceDetect from '../../hooks/useDeviceDetect';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { ProductGender, ProductSpecies, ProductType } from '../../enums/product.enum';
 import { ProductsInquiry } from '../../types/product/product.input';
@@ -14,7 +13,6 @@ interface HeaderFilterProps {
 // homepage search: category (product type) -> species -> gender, then search on /product
 const HeaderFilter = (props: HeaderFilterProps) => {
 	const { initialInput } = props;
-	const device = useDeviceDetect();
 	const { t } = useTranslation('common');
 	const [searchFilter, setSearchFilter] = useState<ProductsInquiry>(initialInput);
 	const typeRef: any = useRef();
@@ -155,62 +153,58 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 		}
 	};
 
-	if (device === 'mobile') {
-		return <div>HEADER FILTER MOBILE</div>;
-	} else {
-		return (
-			<Stack className={'search-box'}>
-				<Stack className={'select-box'}>
-					<Box component={'div'} className={`box ${openType ? 'on' : ''}`} onClick={typeStateChangeHandler}>
-						<span>{searchFilter?.search?.typeList ? t(searchFilter?.search?.typeList[0]) : t('Product type')}</span>
-						<ExpandMoreIcon />
-					</Box>
-					<Box component={'div'} className={`box ${openSpecies ? 'on' : ''}`} onClick={speciesStateChangeHandler}>
-						<span>{searchFilter?.search?.speciesList ? t(searchFilter?.search?.speciesList[0]) : t('Species')}</span>
-						<ExpandMoreIcon />
-					</Box>
-					{isPet && (
-						<Box component={'div'} className={`box ${openGender ? 'on' : ''}`} onClick={genderStateChangeHandler}>
-							<span>{searchFilter?.search?.genderList ? t(searchFilter?.search?.genderList[0]) : t('Gender')}</span>
-							<ExpandMoreIcon />
-						</Box>
-					)}
-				</Stack>
-				<Stack className={'search-box-other'}>
-					<Box component={'div'} className={'search-btn'} onClick={pushSearchHandler}>
-						<img src="/img/icons/search_white.svg" alt="" />
-					</Box>
-				</Stack>
-
-				{/*MENU */}
-				<div className={`filter-rooms ${openType ? 'on' : ''}`} ref={typeRef}>
-					{productType.map((type: string) => (
-						<span onClick={() => productTypeSelectHandler(type)} key={type}>
-							{t(type)}
-						</span>
-					))}
-				</div>
-
-				<div className={`filter-rooms ${openSpecies ? 'on' : ''}`} ref={speciesRef}>
-					{productSpecies.map((species: string) => (
-						<span onClick={() => productSpeciesSelectHandler(species)} key={species}>
-							{t(species)}
-						</span>
-					))}
-				</div>
-
+	return (
+		<Stack className={'search-box'}>
+			<Stack className={'select-box'}>
+				<Box component={'div'} className={`box ${openType ? 'on' : ''}`} onClick={typeStateChangeHandler}>
+					<span>{searchFilter?.search?.typeList ? t(searchFilter?.search?.typeList[0]) : t('Product type')}</span>
+					<ExpandMoreIcon />
+				</Box>
+				<Box component={'div'} className={`box ${openSpecies ? 'on' : ''}`} onClick={speciesStateChangeHandler}>
+					<span>{searchFilter?.search?.speciesList ? t(searchFilter?.search?.speciesList[0]) : t('Species')}</span>
+					<ExpandMoreIcon />
+				</Box>
 				{isPet && (
-					<div className={`filter-rooms ${openGender ? 'on' : ''}`} ref={genderRef}>
-						{productGender.map((gender: string) => (
-							<span onClick={() => productGenderSelectHandler(gender)} key={gender}>
-								{t(gender)}
-							</span>
-						))}
-					</div>
+					<Box component={'div'} className={`box ${openGender ? 'on' : ''}`} onClick={genderStateChangeHandler}>
+						<span>{searchFilter?.search?.genderList ? t(searchFilter?.search?.genderList[0]) : t('Gender')}</span>
+						<ExpandMoreIcon />
+					</Box>
 				)}
 			</Stack>
-		);
-	}
+			<Stack className={'search-box-other'}>
+				<Box component={'div'} className={'search-btn'} onClick={pushSearchHandler}>
+					<img src="/img/icons/search_white.svg" alt="" />
+				</Box>
+			</Stack>
+
+			{/*MENU */}
+			<div className={`filter-rooms ${openType ? 'on' : ''}`} ref={typeRef}>
+				{productType.map((type: string) => (
+					<span onClick={() => productTypeSelectHandler(type)} key={type}>
+						{t(type)}
+					</span>
+				))}
+			</div>
+
+			<div className={`filter-rooms ${openSpecies ? 'on' : ''}`} ref={speciesRef}>
+				{productSpecies.map((species: string) => (
+					<span onClick={() => productSpeciesSelectHandler(species)} key={species}>
+						{t(species)}
+					</span>
+				))}
+			</div>
+
+			{isPet && (
+				<div className={`filter-rooms ${openGender ? 'on' : ''}`} ref={genderRef}>
+					{productGender.map((gender: string) => (
+						<span onClick={() => productGenderSelectHandler(gender)} key={gender}>
+							{t(gender)}
+						</span>
+					))}
+				</div>
+			)}
+		</Stack>
+	);
 };
 
 HeaderFilter.defaultProps = {

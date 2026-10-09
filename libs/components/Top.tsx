@@ -147,21 +147,36 @@ const Top = () => {
 	if (device == 'mobile') {
 		return (
 			<Stack className={'top'}>
-				<Link href={'/'}>
-					<div>{t('Home')}</div>
+				<Link href={'/'} className={'mobile-logo'} aria-label={'Petoria'}>
+					<PetoriaLogo />
 				</Link>
-				<Link href={'/product'}>
-					<div>{t('Products')}</div>
-				</Link>
-				<Link href={'/agent'}>
-					<div> {t('Sellers')} </div>
-				</Link>
-				<Link href={'/community?articleCategory=FREE'}>
-					<div> {t('Community')} </div>
-				</Link>
-				<Link href={'/cs'}>
-					<div> {t('CS')} </div>
-				</Link>
+				<Stack className={'mobile-nav'}>
+					<Link href={'/'}>
+						<div>{t('Home')}</div>
+					</Link>
+					<Link href={'/product'}>
+						<div>{t('Products')}</div>
+					</Link>
+					<Link href={'/agent'}>
+						<div> {t('Sellers')} </div>
+					</Link>
+					<Link href={'/community?articleCategory=FREE'}>
+						<div> {t('Community')} </div>
+					</Link>
+					<Link href={'/cs'}>
+						<div> {t('CS')} </div>
+					</Link>
+					{/* no account box on phones before: link to login or to my page */}
+					{user?._id ? (
+						<Link href={'/mypage'}>
+							<div>{t('My Page')}</div>
+						</Link>
+					) : (
+						<Link href={'/account/join'}>
+							<div>{t('Login')}</div>
+						</Link>
+					)}
+				</Stack>
 			</Stack>
 		);
 	} else {

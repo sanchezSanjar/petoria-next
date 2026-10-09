@@ -5,11 +5,112 @@
 #pc-wrap.mobile {
   // mobile header row only (Top.tsx renders it inside #top); other components also use a .top class
   #top .top {
-    height: 100px;
+    // dark brand bar: logo on top, menu underneath (scrolls sideways if it does not fit)
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 14px 16px 10px;
+    background: $color-text;
+    .mobile-logo {
+      align-self: flex-start;
+      .petoria-logo {
+        width: 120px;
+        height: auto;
+      }
+    }
+    .mobile-nav {
+      display: flex;
+      flex-direction: row;
+      gap: 18px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      a {
+        flex-shrink: 0;
+        color: #eeeeeeed;
+        font-family: $font;
+        font-size: 14px;
+        font-weight: 600;
+        white-space: nowrap;
+        padding: 6px 0;
+      }
+    }
+  }
+
+  // homepage product search (HeaderFilter) under the mobile header
+  .mobile-search {
+    padding: 0 16px 16px;
+    background: $color-text;
+    .search-box {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.12);
+      .select-box {
+        order: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        .box {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 12px 16px;
+          border-radius: 10px;
+          background: $color-white;
+          color: $color-text;
+          font-family: $font;
+          font-size: 14px;
+          cursor: pointer;
+          &.on {
+            outline: 2px solid $color-accent;
+          }
+        }
+      }
+      .search-box-other {
+        order: 3;
+      }
+      .search-box-other .search-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 46px;
+        border-radius: 10px;
+        background: $color-accent;
+        cursor: pointer;
+        img {
+          width: 20px;
+        }
+      }
+      // option chips appear under the bar while a dropdown is open
+      .filter-rooms {
+        order: 2;
+        display: none;
+        &.on {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          padding: 10px;
+          border-radius: 10px;
+          background: $color-white;
+        }
+        span {
+          padding: 8px 14px;
+          border: 1px solid $color-border;
+          border-radius: 8px;
+          color: $color-text;
+          font-family: $font;
+          font-size: 14px;
+          cursor: pointer;
+        }
+      }
+    }
   }
 
   .info-box {
