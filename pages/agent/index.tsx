@@ -1,7 +1,6 @@
 import React, { ChangeEvent, MouseEvent, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { NextPage } from 'next';
-import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import { Stack, Box, Button, Pagination } from '@mui/material';
 import { Menu, MenuItem } from '@mui/material';
@@ -33,7 +32,6 @@ const parseInput = (input: unknown) => {
 };
 
 const AgentList: NextPage = ({ initialInput, ...props }: any) => {
-	const device = useDeviceDetect();
 	const { t } = useTranslation('common');
 	const router = useRouter();
 	const [anchorEl2, setAnchorEl2] = useState<null | HTMLElement>(null);
@@ -165,95 +163,91 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 		setCurrentPage(value);
 	};
 
-	if (device === 'mobile') {
-		return <h1>AGENTS PAGE MOBILE</h1>;
-	} else {
-		return (
-			<Stack className={'agent-list-page'}>
-				<Stack className={'container'}>
-					<Stack className={'filter'}>
-						<Box component={'div'} className={'left'}>
-							<input
-								type="text"
-								placeholder={t('Search for a seller')}
-								value={searchText}
-								onChange={(e: any) => setSearchText(e.target.value)}
-								onKeyDown={(event: any) => {
-									if (event.key == 'Enter') {
-										const updatedFilter = {
-											...searchFilter,
-											page: 1,
-											search: { ...searchFilter.search, text: searchText },
-										};
-										router.push(
-											`/agent?input=${JSON.stringify(updatedFilter)}`,
-											`/agent?input=${JSON.stringify(updatedFilter)}`,
-											{ scroll: false },
-										);
-									}
-								}}
-							/>
-						</Box>
-						<Box component={'div'} className={'right'}>
-							<span>{t('Sort by')}</span>
-							<div>
-								<Button onClick={sortingClickHandler} endIcon={<KeyboardArrowDownRoundedIcon />}>
-									{t(filterSortName)}
-								</Button>
-								<Menu anchorEl={anchorEl} open={sortingOpen} onClose={sortingCloseHandler} sx={{ paddingTop: '5px' }}>
-									<MenuItem onClick={sortingHandler} id={'recent'} disableRipple>
-										{t('Recent')}
-									</MenuItem>
-									<MenuItem onClick={sortingHandler} id={'old'} disableRipple>
-										{t('Oldest')}
-									</MenuItem>
-									<MenuItem onClick={sortingHandler} id={'likes'} disableRipple>
-										{t('Likes')}
-									</MenuItem>
-									<MenuItem onClick={sortingHandler} id={'views'} disableRipple>
-										{t('Views')}
-									</MenuItem>
-								</Menu>
-							</div>
-						</Box>
-					</Stack>
-					<Stack className={'card-wrap'}>
-						{agents?.length === 0 ? (
-							<div className={'no-data'}>
-								<img src="/img/icons/icoAlert.svg" alt="" />
-								<p>{t('No Sellers found!')}</p>
-							</div>
-						) : (
-							agents.map((agent: Member) => {
-								return <AgentCard agent={agent} key={agent._id} likeMemberHandler={likeMemberHandler} />;
-							})
+	return (
+		<Stack className={'agent-list-page'}>
+			<Stack className={'container'}>
+				<Stack className={'filter'}>
+					<Box component={'div'} className={'left'}>
+						<input
+							type="text"
+							placeholder={t('Search for a seller')}
+							value={searchText}
+							onChange={(e: any) => setSearchText(e.target.value)}
+							onKeyDown={(event: any) => {
+								if (event.key == 'Enter') {
+									const updatedFilter = {
+										...searchFilter,
+										page: 1,
+										search: { ...searchFilter.search, text: searchText },
+									};
+									router.push(
+										`/agent?input=${JSON.stringify(updatedFilter)}`,
+										`/agent?input=${JSON.stringify(updatedFilter)}`,
+										{ scroll: false },
+									);
+								}
+							}}
+						/>
+					</Box>
+					<Box component={'div'} className={'right'}>
+						<span>{t('Sort by')}</span>
+						<div>
+							<Button onClick={sortingClickHandler} endIcon={<KeyboardArrowDownRoundedIcon />}>
+								{t(filterSortName)}
+							</Button>
+							<Menu anchorEl={anchorEl} open={sortingOpen} onClose={sortingCloseHandler} sx={{ paddingTop: '5px' }}>
+								<MenuItem onClick={sortingHandler} id={'recent'} disableRipple>
+									{t('Recent')}
+								</MenuItem>
+								<MenuItem onClick={sortingHandler} id={'old'} disableRipple>
+									{t('Oldest')}
+								</MenuItem>
+								<MenuItem onClick={sortingHandler} id={'likes'} disableRipple>
+									{t('Likes')}
+								</MenuItem>
+								<MenuItem onClick={sortingHandler} id={'views'} disableRipple>
+									{t('Views')}
+								</MenuItem>
+							</Menu>
+						</div>
+					</Box>
+				</Stack>
+				<Stack className={'card-wrap'}>
+					{agents?.length === 0 ? (
+						<div className={'no-data'}>
+							<img src="/img/icons/icoAlert.svg" alt="" />
+							<p>{t('No Sellers found!')}</p>
+						</div>
+					) : (
+						agents.map((agent: Member) => {
+							return <AgentCard agent={agent} key={agent._id} likeMemberHandler={likeMemberHandler} />;
+						})
+					)}
+				</Stack>
+				<Stack className={'pagination'}>
+					<Stack className="pagination-box">
+						{agents.length !== 0 && Math.ceil(total / searchFilter.limit) > 1 && (
+							<Stack className="pagination-box">
+								<Pagination
+									page={currentPage}
+									count={Math.ceil(total / searchFilter.limit)}
+									onChange={paginationChangeHandler}
+									shape="circular"
+									color="primary"
+								/>
+							</Stack>
 						)}
 					</Stack>
-					<Stack className={'pagination'}>
-						<Stack className="pagination-box">
-							{agents.length !== 0 && Math.ceil(total / searchFilter.limit) > 1 && (
-								<Stack className="pagination-box">
-									<Pagination
-										page={currentPage}
-										count={Math.ceil(total / searchFilter.limit)}
-										onChange={paginationChangeHandler}
-										shape="circular"
-										color="primary"
-									/>
-								</Stack>
-							)}
-						</Stack>
 
-						{agents.length !== 0 && (
-							<span>
-								{t('Total {{count}} sellers available', { count: total })}
-							</span>
-						)}
-					</Stack>
+					{agents.length !== 0 && (
+						<span>
+							{t('Total {{count}} sellers available', { count: total })}
+						</span>
+					)}
 				</Stack>
 			</Stack>
-		);
-	}
+		</Stack>
+	);
 };
 
 AgentList.defaultProps = {

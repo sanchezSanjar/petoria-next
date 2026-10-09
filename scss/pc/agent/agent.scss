@@ -79,3 +79,25 @@
 		}
 	}
 }
+
+/** sellers list: responsive (UI phase F) **/
+#pc-wrap .agent-list-page {
+	@include tablet {
+		padding-top: $space-7;
+	}
+	.container .filter {
+		@include mobile {
+			flex-wrap: wrap;
+			gap: $space-3;
+			.left {
+				width: 100%;
+				input {
+					width: 100%;
+				}
+			}
+			.right button {
+				margin-left: 0;
+			}
+		}
+	}
+}

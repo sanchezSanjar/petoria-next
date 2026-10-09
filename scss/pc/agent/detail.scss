@@ -341,3 +341,37 @@
 		}
 	}
 }
+
+/** seller detail: responsive (UI phase F) **/
+#pc-wrap .agent-detail-page {
+	@include tablet {
+		padding-top: $space-7;
+	}
+	.container {
+		.agent-info {
+			@include laptop {
+				// width: 100% plus the 58px margin made this row wider than the page
+				margin-left: 0;
+			}
+			@include mobile {
+				img {
+					margin-right: $space-4;
+					width: 96px;
+					height: 96px;
+				}
+			}
+		}
+		.agent-home-list .card-wrap .wrap-main {
+			@include tablet {
+				width: 100%;
+				margin-left: 0;
+				.product-big-card-box {
+					width: 100%;
+					max-width: 410px;
+					margin-left: 0;
+					margin-right: 0;
+				}
+			}
+		}
+	}
+}
