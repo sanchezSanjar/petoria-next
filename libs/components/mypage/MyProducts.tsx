@@ -54,7 +54,7 @@ const MyProducts: NextPage = ({ initialInput, ...props }: any) => {
 	const deleteProductHandler = async (id: string) => {
 		try {
 		  const sweetHandler = async (id: string) => {
-			if (await sweetConfirmAlert('Are you sure  to delete this property?')) {
+			if (await sweetConfirmAlert('Are you sure to delete this product?')) {
 			  await updateProduct({
 				variables: {
 				  input: {
@@ -105,7 +105,7 @@ const MyProducts: NextPage = ({ initialInput, ...props }: any) => {
 			<div id="my-product-page">
 				<Stack className="main-title-box">
 					<Stack className="right-box">
-						<Typography className="main-title">{t('My Properties')}</Typography>
+						<Typography className="main-title">{t('My Products')}</Typography>
 						<Typography className="sub-title">{t('We are glad to see you again!')}</Typography>
 					</Stack>
 				</Stack>
@@ -136,7 +136,7 @@ const MyProducts: NextPage = ({ initialInput, ...props }: any) => {
 						{agentProducts?.length === 0 ? (
 							<div className={'no-data'}>
 								<img src="/img/icons/icoAlert.svg" alt="" />
-								<p>{t('No Property found!')}</p>
+								<p>{t('No Product found!')}</p>
 							</div>
 						) : (
 							agentProducts.map((product: Product) => {
@@ -162,7 +162,7 @@ const MyProducts: NextPage = ({ initialInput, ...props }: any) => {
 									/>
 								</Stack>
 								<Stack className="total-result">
-									<Typography>{t('{{count}} property available', { count: total })}</Typography>
+									<Typography>{t('{{count}} products available', { count: total })}</Typography>
 								</Stack>
 							</Stack>
 						)}

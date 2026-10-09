@@ -331,7 +331,7 @@ const Filter = (props: FilterType) => {
 		return (
 			<Stack className={'filter-main'}>
 				<Stack className={'find-your-home'} mb={'40px'}>
-					<Typography className={'title-main'}>{t('Find Your Home')}</Typography>
+					<Typography className={'title-main'}>{t('Find Your Pet')}</Typography>
 					<Stack className={'input-box'}>
 						<OutlinedInput
 							value={searchText}
@@ -405,7 +405,7 @@ const Filter = (props: FilterType) => {
 					</Stack>
 				</Stack>
 				<Stack className={'find-your-home'} mb={'30px'}>
-					<Typography className={'title'}>{t('Property Type')}</Typography>
+					<Typography className={'title'}>{t('Product Type')}</Typography>
 					{productType.map((type: string) => (
 						<Stack className={'input-box'} key={type}>
 							<Checkbox

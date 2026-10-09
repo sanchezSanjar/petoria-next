@@ -35,7 +35,7 @@ const Faq = () => {
 	const device = useDeviceDetect();
 	const { t } = useTranslation('common');
 	const router = useRouter();
-	const [category, setCategory] = useState<string>('property');
+	const [category, setCategory] = useState<string>('product');
 	const [expanded, setExpanded] = useState<string | false>('panel1');
 
 	/** APOLLO REQUESTS **/
@@ -51,73 +51,73 @@ const Faq = () => {
 	};
 
 	const data: any = {
-		property: [
+		product: [
 			{
 				id: '00f5a45ed8897f8090116a01',
-				subject: 'Are the properties displayed on the site reliable?',
-				content: 'of course we only have verified properties',
+				subject: 'Are the pets and products on Petoria reliable?',
+				content: 'Yes. Every listing comes from a registered seller, and listings that break our rules are removed by the admin.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a22',
-				subject: 'What types of properties do you offer?',
-				content: 'We offer single-family homes, condos, townhouses, apartments, and penthouses',
+				subject: 'What kinds of products do you offer?',
+				content: 'Pets, pet food, toys and accessories for dogs, cats, birds and fish.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a21',
-				subject: 'How can I search for properties on your website?',
-				content: 'Simply use our search bar to enter location, price range, bedrooms/bathrooms, and property type.',
+				subject: 'How can I search for products on your website?',
+				content: 'Use the search bar and filters to choose product type, species, gender, location and price range.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a23',
-				subject: 'Do you provide assistance for first-time homebuyers?',
-				content: 'Yes, we guide you through the process and help find suitable financing.',
+				subject: 'Why do some pets show a gender and other products do not?',
+				content: 'Gender is required for pets only. Food, toys and accessories do not have a gender.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a24',
-				subject: 'What should I consider when buying a property?',
-				content: 'Location, condition, size, amenities, and future development plans.',
+				subject: 'What should I check before buying a pet?',
+				content: 'Read the description, look at all photos, check the species and gender, and ask the seller about health and vaccinations.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a25',
-				subject: 'How long does the home-buying process typically take?',
-				content: 'Usually 3 to 6 days, depending on various factors.',
+				subject: 'What does "Sold out" mean?',
+				content: 'The seller has marked the product as sold. It stays visible for reference but can no longer be bought.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a29',
-				subject: 'What happens if I encounter issues with the property after purchase?',
-				content: 'We offer post-purchase support to address any concerns promptly.',
+				subject: 'What if there is a problem with my product after purchase?',
+				content: 'Contact the seller first. If it cannot be solved, contact our support team through the CS page.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a28',
-				subject: 'Do you offer properties in specific neighborhoods?',
-				content: 'Yes, we have listings in various neighborhoods based on your preferences.',
+				subject: 'Can I find products near me?',
+				content: 'Yes, filter by location to see products listed in your city.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a27',
-				subject: 'Can I sell my property through your website?',
-				content: 'Absolutely, we provide services for selling properties as well.',
+				subject: 'Can I sell my own products on Petoria?',
+				content: 'Yes. Sign up as a seller, then add products from My Page.',
 			},
 			{
 				id: '00f5a45ed8897f8090116b99',
-				subject: 'What if I need help understanding legal aspects of property purchase?',
-				content: 'Our team can provide basic guidance and recommend legal professionals if needed.',
+				subject: 'How do I save products I like?',
+				content: 'Click the heart icon on a product. You can find all liked products under My Favorites on My Page.',
 			},
 		],
 		payment: [
 			{
 				id: '00f5a45ed8897f8090116a02',
 				subject: 'How can I make the payment?',
-				content: 'you make the payment through an agent!',
+				content: 'You arrange the payment directly with the seller.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a91',
 				subject: 'Are there any additional fees for using your services?',
-				content: 'No, our services are free for buyers. Sellers pay a commission upon successful sale.',
+				content: 'No, Petoria is free for buyers and sellers.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a92',
 				subject: 'Is there an option for installment payments?',
-				content: 'Yes, we offer installment payment plans for certain properties. Please inquire for more details.',
+				content: 'Some sellers offer installment payments for certain products. Please ask the seller for details.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a93',
@@ -164,116 +164,105 @@ const Faq = () => {
 			{
 				id: '00f5a45ed8897f8090116a03',
 				subject: 'What should buyers pay attention to?',
-				content: 'Buyers should check and decide whether the property they want to buy or rent is actually suitable!',
+				content: 'Check that the product and its species match what you need, and read the description carefully before buying.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a85',
-				subject: 'How can I determine if a property is within my budget?',
-				content:
-					'Calculate your budget by considering your income, down payment, and potential mortgage payments. Our agents can assist you within your budget.',
+				subject: 'How can I check that a product fits my budget?',
+				content: 'Use the price range filter on the product page to see only products within your budget.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a84',
-				subject: 'What documents do I need to provide when purchasing a property?',
-				content:
-					"You'll typically need identification, proof of income, bank statements, and any necessary loan documentation. Our team will guide you through.",
+				subject: 'How do I choose the right food for my pet?',
+				content: 'Filter by species and choose food made for your pet, then check the description for age and size details.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a83',
-				subject: 'What factors should I consider when choosing a neighborhood?',
-				content:
-					'Consider factors such as location, safety, schools, amenities, transportation, and future development plans.',
+				subject: 'Can I negotiate the price of a product?',
+				content: 'Prices are set by sellers. You can contact the seller to ask about the price.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a82',
-				subject: 'Can I negotiate the price of a property?',
-				content:
-					'Yes, you can negotiate the price of a property. Our agents will assist you in making competitive offers and negotiating terms with the seller.',
+				subject: 'What are red flags to watch out for when buying a pet?',
+				content: 'Very low prices, missing photos, no description and sellers who refuse to answer questions.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a81',
-				subject: 'What are some red flags to watch out for when viewing properties?',
-				content:
-					'Watch out for signs of structural damage, water damage, mold, outdated systems, and undesirable neighborhood conditions.',
+				subject: 'How can I contact a seller?',
+				content: "On the product detail page you can see the seller's phone number. Click the seller's name to open their page and other products.",
 			},
 			{
 				id: '00f5a45ed8897f8090116a80',
-				subject: 'Do you provide assistance with property inspections?',
-				content:
-					'Yes, we can recommend reputable inspectors and accompany you during property inspections to identify any potential issues.',
+				subject: 'How do I know if a seller is trusted?',
+				content: "Check the seller's rank, likes, number of products and reviews from other members.",
 			},
 			{
 				id: '00f5a45ed8897f8090116a79',
-				subject: 'How long does it typically take to find the right property?',
-				content:
-					'The timeframe varies depending on your preferences and market conditions. Our agents will work diligently to find the right property as quickly as possible.',
+				subject: 'Can I see products I viewed before?',
+				content: 'Yes, open Recently Visited on My Page.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a78',
-				subject: 'What are the advantages of using a real estate agent when buying a property?',
-				content:
-					'Real estate agents provide expertise, negotiation skills, and guidance throughout the buying process, ultimately saving you time and hassle.',
+				subject: 'How do I leave a review?',
+				content: 'Open the product detail page, write your review at the bottom and submit it.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a77',
-				subject: 'What happens if I change my mind about a property after making an offer?',
-				content:
-					'Depending on the terms of the offer and the stage of the transaction, you may have options to withdraw your offer.',
+				subject: 'What should I prepare before bringing a new pet home?',
+				content: 'Food, a bed or cage, toys and basic accessories. You can find all of them in our shop.',
 			},
 		],
 
 		agents: [
 			{
 				id: '00f5a45ed8897f8090116a04',
-				subject: 'What do I need to do if I want to become an agent?',
-				content:
-					'If you really decide to become an agent, you should read our terms and conditions and contact the admin!',
+				subject: 'How do I become a seller?',
+				content: 'Choose "Seller" when you sign up. Seller accounts can add and manage products.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a62',
-				subject: 'What qualifications do I need to become a real estate agent?',
-				content: 'Complete pre-licensing course, pass licensing exam, meet state requirements.',
+				subject: 'How do I add a new product?',
+				content: 'Go to My Page, open Add Product, fill in the details and upload photos.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a63',
-				subject: 'How do I find clients as a new real estate agent?',
-				content: 'Build network, use online/offline marketing, join reputable brokerage.',
+				subject: 'Why is gender required when I add a pet?',
+				content: 'Buyers need to know the gender of a pet. For food, toys and accessories, gender is not needed.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a64',
-				subject: 'What are some effective marketing strategies for selling properties?',
-				content: 'Use social media, online platforms, networking events, and direct mail.',
+				subject: 'How many photos can I upload?',
+				content: 'Up to 5 photos per product, in JPEG or PNG format.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a65',
-				subject: 'How do I handle negotiations with buyers and sellers?',
-				content: 'Develop strong negotiation skills, understand market trends, represent client interests.',
+				subject: 'How do I mark a product as sold?',
+				content: 'Open My Products on My Page and change the product status to sold.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a66',
-				subject: 'What should I do to stay updated with market trends and changes?',
-				content: 'Attend industry events, follow real estate news, participate in training.',
+				subject: 'How can I get more buyers?',
+				content: 'Use clear photos, write a detailed description and set a fair price.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a67',
-				subject: 'How do I handle difficult clients or situations?',
-				content:
-					'Approach with professionalism, empathy, and patience. Listen actively, address issues collaboratively.',
+				subject: 'How is the seller rank calculated?',
+				content: 'Rank grows with your products, articles, likes and views.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a68',
-				subject: 'What tools and technologies should I utilize as a real estate agent?',
-				content: 'Use CRM software, virtual tours, digital marketing tools, and mobile apps.',
+				subject: 'Can I edit a product after publishing it?',
+				content: 'Yes, open My Products and choose edit.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a69',
-				subject: 'How do I ensure compliance with real estate laws and regulations?',
-				content: 'Stay updated with laws, attend education courses, consult legal professionals.',
+				subject: 'How do I handle difficult buyers?',
+				content: 'Stay polite and professional. If there is abuse, contact the admin.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a70',
-				subject: 'What strategies can I use to grow my real estate business?',
-				content: 'Build relationships, provide exceptional service, seek referrals, and continuously improve skills.',
+				subject: 'What should I do to sell pets responsibly?',
+				content: 'Give honest health information, accurate species and gender, and only sell healthy animals.',
 			},
 		],
 		membership: [
@@ -304,7 +293,7 @@ const Faq = () => {
 			},
 			{
 				id: '00f5a45ed8897f8090116a56',
-				subject: 'Do members receive discounts on property listings or services?',
+				subject: 'Do members receive discounts on products or services?',
 				content: 'Membership discounts are not part of our current offerings.',
 			},
 			{
@@ -424,7 +413,7 @@ const Faq = () => {
 			},
 			{
 				id: '00f5a45ed8897f8090116a31',
-				subject: 'Do you host events or webinars related to real estate?',
+				subject: 'Do you host events or webinars about pet care?',
 				content: "We're not hosting events or webinars at this time.",
 			},
 			{
@@ -442,12 +431,12 @@ const Faq = () => {
 			<Stack className={'faq-content'}>
 				<Box className={'categories'} component={'div'}>
 					<div
-						className={category === 'property' ? 'active' : ''}
+						className={category === 'product' ? 'active' : ''}
 						onClick={() => {
-							changeCategoryHandler('property');
+							changeCategoryHandler('product');
 						}}
 					>
-						{t('Property')}
+						{t('Product')}
 					</div>
 					<div
 						className={category === 'payment' ? 'active' : ''}
@@ -463,7 +452,7 @@ const Faq = () => {
 							changeCategoryHandler('buyers');
 						}}
 					>
-						{t('Foy Buyers')}
+						{t('For Buyers')}
 					</div>
 					<div
 						className={category === 'agents' ? 'active' : ''}
@@ -471,7 +460,7 @@ const Faq = () => {
 							changeCategoryHandler('agents');
 						}}
 					>
-						{t('For Agents')}
+						{t('For Sellers')}
 					</div>
 					<div
 						className={category === 'membership' ? 'active' : ''}

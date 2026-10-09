@@ -308,7 +308,7 @@ const ProductDetail: NextPage = ({ initialComment, ...props }: any) => {
 											<CategoryOutlinedIcon />
 										</Stack>
 										<Stack className={'option-includes'}>
-											<Typography className={'title'}>{t('Property Type')}</Typography>
+											<Typography className={'title'}>{t('Product Type')}</Typography>
 											<Typography className={'option-data'}>{product?.productType && t(product.productType)}</Typography>
 										</Stack>
 									</Stack>
@@ -351,11 +351,11 @@ const ProductDetail: NextPage = ({ initialComment, ...props }: any) => {
 								</Stack>
 								<Stack className={'prop-desc-config'}>
 									<Stack className={'top'}>
-										<Typography className={'title'}>{t('Property Description')}</Typography>
+										<Typography className={'title'}>{t('Product Description')}</Typography>
 										<Typography className={'desc'}>{product?.productDesc ?? 'No Description!'}</Typography>
 									</Stack>
 									<Stack className={'bottom'}>
-										<Typography className={'title'}>{t('Property Details')}</Typography>
+										<Typography className={'title'}>{t('Product Details')}</Typography>
 										<Stack className={'info-box'}>
 											<Stack className={'left'}>
 												<Box component={'div'} className={'info'}>
@@ -377,7 +377,7 @@ const ProductDetail: NextPage = ({ initialComment, ...props }: any) => {
 											</Stack>
 											<Stack className={'right'}>
 												<Box component={'div'} className={'info'}>
-													<Typography className={'title'}>{t('Property Type')}</Typography>
+													<Typography className={'title'}>{t('Product Type')}</Typography>
 													<Typography className={'data'}>{product?.productType && t(product.productType)}</Typography>
 												</Box>
 												<Box component={'div'} className={'info'}>
@@ -525,7 +525,7 @@ const ProductDetail: NextPage = ({ initialComment, ...props }: any) => {
 								</Stack>
 								<Stack className={'info-box'}>
 									<Typography className={'sub-title'}>{t('Message')}</Typography>
-									<textarea placeholder={t('Hello, I am interested in this property')}></textarea>
+									<textarea placeholder={t('Hello, I am interested in this product')}></textarea>
 								</Stack>
 								<Stack className={'info-box'}>
 									<Button className={'send-message'}>
@@ -551,7 +551,7 @@ const ProductDetail: NextPage = ({ initialComment, ...props }: any) => {
 							<Stack className={'similar-products-config'}>
 								<Stack className={'title-pagination-box'}>
 									<Stack className={'title-box'}>
-										<Typography className={'main-title'}>{t('Destination Property')}</Typography>
+										<Typography className={'main-title'}>{t('Similar Products')}</Typography>
 										<Typography className={'sub-title'}>Aliquam lacinia diam quis lacus euismod</Typography>
 									</Stack>
 									<Stack className={'pagination-box'}>

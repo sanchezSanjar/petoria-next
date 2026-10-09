@@ -148,7 +148,7 @@ const Join: NextPage = () => {
 															checked={input?.type == 'AGENT'}
 														/>
 													}
-													label={t('Agent')}
+													label={t('Seller')}
 												/>
 											</FormGroup>
 										</div>

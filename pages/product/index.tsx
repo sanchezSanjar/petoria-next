@@ -181,7 +181,7 @@ const ProductList: NextPage = ({ initialInput, ...props }: any) => {
 								{products?.length === 0 ? (
 									<div className={'no-data'}>
 										<img src="/img/icons/icoAlert.svg" alt="" />
-										<p>{t('No Properties found!')}</p>
+										<p>{t('No Products found!')}</p>
 									</div>
 								) : (
 									products.map((product: Product) => {
@@ -205,7 +205,7 @@ const ProductList: NextPage = ({ initialInput, ...props }: any) => {
 								{products.length !== 0 && (
 									<Stack className="total-result">
 										<Typography>
-											{t('Total {{count}} properties available', { count: total })}
+											{t('Total {{count}} products available', { count: total })}
 										</Typography>
 									</Stack>
 								)}

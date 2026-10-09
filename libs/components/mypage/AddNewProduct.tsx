@@ -158,7 +158,7 @@ const AddProduct = ({ initialValues, ...props }: any) => {
 			},
 		  });
 	  
-		  await sweetMixinSuccessAlert('This property has been created successfully.');
+		  await sweetMixinSuccessAlert('This product has been created successfully.');
 		  await router.push({
 			pathname: '/mypage',
 			query: {
@@ -178,7 +178,7 @@ const AddProduct = ({ initialValues, ...props }: any) => {
 			},
 		  });
 	  
-		  await sweetMixinSuccessAlert('This property has been updated successfully.');
+		  await sweetMixinSuccessAlert('This product has been updated successfully.');
 		  await router.push({
 			pathname: '/mypage',
 			query: {
@@ -201,7 +201,7 @@ const AddProduct = ({ initialValues, ...props }: any) => {
 		return (
 			<div id="add-product-page">
 				<Stack className="main-title-box">
-					<Typography className="main-title">{t('Add New Property')}</Typography>
+					<Typography className="main-title">{t('Add New Product')}</Typography>
 					<Typography className="sub-title">{t('We are glad to see you again!')}</Typography>
 				</Stack>
 
@@ -340,7 +340,7 @@ const AddProduct = ({ initialValues, ...props }: any) => {
 								</Stack>
 							)}
 
-							<Typography className="product-title">{t('Property Description')}</Typography>
+							<Typography className="product-title">{t('Product Description')}</Typography>
 							<Stack className="config-column">
 								<Typography className="title">{t('Description')}</Typography>
 								<textarea
@@ -355,7 +355,7 @@ const AddProduct = ({ initialValues, ...props }: any) => {
 							</Stack>
 						</Stack>
 
-						<Typography className="upload-title">{t('Upload photos of your property')}</Typography>
+						<Typography className="upload-title">{t('Upload photos of your product')}</Typography>
 						<Stack className="images-box">
 							<Stack className="upload-box" onDragOver={(e: React.DragEvent<HTMLElement>) => e.preventDefault()} onDrop={dropImagesHandler}>
 								<svg xmlns="http://www.w3.org/2000/svg" width="121" height="120" viewBox="0 0 121 120" fill="none">

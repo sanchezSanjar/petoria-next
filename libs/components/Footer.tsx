@@ -42,8 +42,8 @@ const Footer = () => {
 						<Box component={'div'} className={'bottom'}>
 							<div>
 								<strong>{t('Popular Search')}</strong>
-								<span>{t('Property for Rent')}</span>
-								<span>{t('Property Low to hide')}</span>
+								<span>{t('Pets for Sale')}</span>
+								<span>{t('Pet Supplies')}</span>
 							</div>
 							<div>
 								<strong>{t('Quick Links')}</strong>
@@ -107,8 +107,8 @@ const Footer = () => {
 						<Box component={'div'} className={'bottom'}>
 							<div>
 								<strong>{t('Popular Search')}</strong>
-								<span>{t('Property for Rent')}</span>
-								<span>{t('Property Low to hide')}</span>
+								<span>{t('Pets for Sale')}</span>
+								<span>{t('Pet Supplies')}</span>
 							</div>
 							<div>
 								<strong>{t('Quick Links')}</strong>

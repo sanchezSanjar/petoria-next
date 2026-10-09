@@ -225,7 +225,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 							<ExpandMoreIcon />
 						</Box>
 						<Box className={`box ${openType ? 'on' : ''}`} onClick={typeStateChangeHandler}>
-							<span> {searchFilter?.search?.typeList ? t(searchFilter?.search?.typeList[0]) : t('Property type')} </span>
+							<span> {searchFilter?.search?.typeList ? t(searchFilter?.search?.typeList[0]) : t('Product type')} </span>
 							<ExpandMoreIcon />
 						</Box>
 						<Box className={`box ${openSpecies ? 'on' : ''}`} onClick={speciesStateChangeHandler}>
@@ -296,7 +296,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 								<CloseIcon />
 							</div>
 							<div className={'top'}>
-								<span>{t('Find your home')}</span>
+								<span>{t('Find your pet')}</span>
 								<div className={'search-input-box'}>
 									<img src="/img/icons/search.svg" alt="" />
 									<input

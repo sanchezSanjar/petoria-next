@@ -70,7 +70,7 @@ const TopProducts = (props: TopProductsProps) => {
 			<Stack className={'top-products'}>
 				<Stack className={'container'}>
 					<Stack className={'info-box'}>
-						<span>{t('Top properties')}</span>
+						<span>{t('Top products')}</span>
 					</Stack>
 					<Stack className={'card-box'}>
 						<Swiper
@@ -98,8 +98,8 @@ const TopProducts = (props: TopProductsProps) => {
 				<Stack className={'container'}>
 					<Stack className={'info-box'}>
 						<Box component={'div'} className={'left'}>
-							<span>{t('Top properties')}</span>
-							<p>{t('Check out our Top Properties')}</p>
+							<span>{t('Top products')}</span>
+							<p>{t('Check out our Top Products')}</p>
 						</Box>
 						<Box component={'div'} className={'right'}>
 							<div className={'pagination-box'}>

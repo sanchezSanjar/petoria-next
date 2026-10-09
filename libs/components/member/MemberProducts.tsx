@@ -56,7 +56,7 @@ const MyProducts: NextPage = ({ initialInput, ...props }: any) => {
 			<div id="member-products-page">
 				<Stack className="main-title-box">
 					<Stack className="right-box">
-						<Typography className="main-title">{t('Properties')}</Typography>
+						<Typography className="main-title">{t('Products')}</Typography>
 					</Stack>
 				</Stack>
 				<Stack className="products-list-box">
@@ -72,7 +72,7 @@ const MyProducts: NextPage = ({ initialInput, ...props }: any) => {
 						{agentProducts?.length === 0 && (
 							<div className={'no-data'}>
 								<img src="/img/icons/icoAlert.svg" alt="" />
-								<p>{t('No Property found!')}</p>
+								<p>{t('No Product found!')}</p>
 							</div>
 						)}
 						{agentProducts?.map((product: Product) => {
@@ -91,7 +91,7 @@ const MyProducts: NextPage = ({ initialInput, ...props }: any) => {
 									/>
 								</Stack>
 								<Stack className="total-result">
-									<Typography>{t('{{count}} property available', { count: total })}</Typography>
+									<Typography>{t('{{count}} products available', { count: total })}</Typography>
 								</Stack>
 							</Stack>
 						)}

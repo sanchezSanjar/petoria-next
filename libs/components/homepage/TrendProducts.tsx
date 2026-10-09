@@ -73,7 +73,7 @@ const TrendProducts = (props: TrendProductsProps) => {
 			<Stack className={'trend-products'}>
 				<Stack className={'container'}>
 					<Stack className={'info-box'}>
-						<span>{t('Trend Properties')}</span>
+						<span>{t('Trend Products')}</span>
 					</Stack>
 					<Stack className={'card-box'}>
 						{trendProducts.length === 0 ? (
@@ -107,7 +107,7 @@ const TrendProducts = (props: TrendProductsProps) => {
 				<Stack className={'container'}>
 					<Stack className={'info-box'}>
 						<Box component={'div'} className={'left'}>
-							<span>{t('Trend Properties')}</span>
+							<span>{t('Trend Products')}</span>
 							<p>{t('Trend is based on likes')}</p>
 						</Box>
 						<Box component={'div'} className={'right'}>

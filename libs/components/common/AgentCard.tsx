@@ -46,7 +46,7 @@ const AgentCard = (props: AgentCardProps) => {
 							backgroundRepeat: 'no-repeat',
 						}}
 					>
-						<div>{t('{{count}} properties', { count: agent?.memberProducts ?? 0 })}</div>
+						<div>{t('{{count}} products', { count: agent?.memberProducts ?? 0 })}</div>
 					</Box>
 				</Link>
 
@@ -60,7 +60,7 @@ const AgentCard = (props: AgentCardProps) => {
 						>
 							<strong title={agent?.memberFullName ?? agent?.memberNick}>{agent?.memberFullName ?? agent?.memberNick}</strong>
 						</Link>
-						<span>{t('Agent')}</span>
+						<span>{t('Seller')}</span>
 					</Box>
 					<Box component={'div'} className={'buttons'}>
 						<IconButton color={'default'}>

@@ -48,7 +48,7 @@ const PopularProducts = (props: PopularProductsProps) => {
 			<Stack className={'popular-products'}>
 				<Stack className={'container'}>
 					<Stack className={'info-box'}>
-						<span>{t('Popular properties')}</span>
+						<span>{t('Popular products')}</span>
 					</Stack>
 					<Stack className={'card-box'}>
 						<Swiper
@@ -76,7 +76,7 @@ const PopularProducts = (props: PopularProductsProps) => {
 				<Stack className={'container'}>
 					<Stack className={'info-box'}>
 						<Box component={'div'} className={'left'}>
-							<span>{t('Popular properties')}</span>
+							<span>{t('Popular products')}</span>
 							<p>{t('Popularity is based on views')}</p>
 						</Box>
 						<Box component={'div'} className={'right'}>

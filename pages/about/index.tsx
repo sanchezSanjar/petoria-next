@@ -24,7 +24,7 @@ const About: NextPage = () => {
 				<Stack className={'intro'}>
 					<Stack className={'container'}>
 						<Stack className={'left'}>
-							<strong>{t("We're on a Mission to Change View of Real Estate Field.")}</strong>
+							<strong>{t("We're on a Mission to Make Pet Care Simple and Joyful.")}</strong>
 						</Stack>
 						<Stack className={'right'}>
 							<p>
@@ -42,7 +42,7 @@ const About: NextPage = () => {
 									<div>
 										<img src="/img/icons/garden.svg" alt="" />
 									</div>
-									<span>{t('Modern Villa')}</span>
+									<span>{t('Healthy Pets')}</span>
 									<p>Nullam sollicitudin blandit Nullam maximus.</p>
 								</div>
 								<div className={'box'}>
@@ -68,7 +68,7 @@ const About: NextPage = () => {
 							</Box>
 							<Box component={'div'}>
 								<strong>12K</strong>
-								<p>{t('Property Ready')}</p>
+								<p>{t('Products Ready')}</p>
 							</Box>
 							<Box component={'div'}>
 								<strong>20M</strong>
@@ -79,7 +79,7 @@ const About: NextPage = () => {
 				</Stack>
 				<Stack className={'agents'}>
 					<Stack className={'container'}>
-						<span className={'title'}>{t('Our Exclusive Agetns')}</span>
+						<span className={'title'}>{t('Our Exclusive Sellers')}</span>
 						<p className={'desc'}>Aliquam lacinia diam quis lacus euismod</p>
 						<Stack className={'wrap'}>
 							{/*{[1, 2, 3, 4, 5].map(() => {*/}
@@ -97,7 +97,7 @@ const About: NextPage = () => {
 								<img src="/img/icons/security.svg" alt="" />
 							</div>
 							<div className={'text-box'}>
-								<span>{t('Property Management')}</span>
+								<span>{t('Pet Care Services')}</span>
 								<p>Nullam sollicitudin blandit eros eu pretium. Nullam maximus ultricies auctor.</p>
 							</div>
 						</Stack>
@@ -106,7 +106,7 @@ const About: NextPage = () => {
 								<img src="/img/icons/keywording.svg" alt="" />
 							</div>
 							<div className={'text_-box'}>
-								<span>{t('Property Management')}</span>
+								<span>{t('Pet Care Services')}</span>
 								<p>Nullam sollicitudin blandit eros eu pretium. Nullam maximus ultricies auctor.</p>
 							</div>
 						</Stack>
@@ -115,7 +115,7 @@ const About: NextPage = () => {
 								<img src="/img/icons/investment.svg" alt="" />
 							</div>
 							<div className={'text-box'}>
-								<span>{t('Property Management')}</span>
+								<span>{t('Pet Care Services')}</span>
 								<p>Nullam sollicitudin blandit eros eu pretium. Nullam maximus ultricies auctor.</p>
 							</div>
 						</Stack>
@@ -141,7 +141,7 @@ const About: NextPage = () => {
 					<Stack className={'container'}>
 						<Box component={'div'} className={'left'}>
 							<strong>{t('Need help? Talk to our expert.')}</strong>
-							<p>{t('Talk to our experts or Browse through more properties.')}</p>
+							<p>{t('Talk to our experts or Browse through more products.')}</p>
 						</Box>
 						<Box component={'div'} className={'right'}>
 							<div className={'white'}>

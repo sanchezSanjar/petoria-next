@@ -175,7 +175,7 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 						<Box component={'div'} className={'left'}>
 							<input
 								type="text"
-								placeholder={t('Search for an agent')}
+								placeholder={t('Search for a seller')}
 								value={searchText}
 								onChange={(e: any) => setSearchText(e.target.value)}
 								onKeyDown={(event: any) => {
@@ -221,7 +221,7 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 						{agents?.length === 0 ? (
 							<div className={'no-data'}>
 								<img src="/img/icons/icoAlert.svg" alt="" />
-								<p>{t('No Agents found!')}</p>
+								<p>{t('No Sellers found!')}</p>
 							</div>
 						) : (
 							agents.map((agent: Member) => {
@@ -246,7 +246,7 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 
 						{agents.length !== 0 && (
 							<span>
-								{t('Total {{count}} agents available', { count: total })}
+								{t('Total {{count}} sellers available', { count: total })}
 							</span>
 						)}
 					</Stack>

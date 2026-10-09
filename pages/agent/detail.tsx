@@ -215,13 +215,13 @@ const AgentDetail: NextPage = ({ initialInput, initialComment, ...props }: any) 
 										/>
 									</Stack>
 									<span>
-										{t('Total {{count}} properties available', { count: productTotal })}
+										{t('Total {{count}} products available', { count: productTotal })}
 									</span>
 								</>
 							) : (
 								<div className={'no-data'}>
 									<img src="/img/icons/icoAlert.svg" alt="" />
-									<p>{t('No properties found!')}</p>
+									<p>{t('No products found!')}</p>
 								</div>
 							)}
 						</Stack>
