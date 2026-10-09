@@ -17,6 +17,7 @@ import { useReactiveVar } from '@apollo/client';
 import { userVar } from '../../apollo/store';
 import { Logout } from '@mui/icons-material';
 import { REACT_APP_API_URL } from '../config';
+import PetoriaLogo from './common/PetoriaLogo';
 
 // Defined outside Top so it isn't recreated (and the menu remounted) on every render
 const StyledMenu = styled((props: MenuProps) => (
@@ -170,7 +171,7 @@ const Top = () => {
 					<Stack className={'container'}>
 						<Box component={'div'} className={'logo-box'}>
 							<Link href={'/'}>
-								<img src="/img/logo/logoWhite.svg" alt="" />
+								<PetoriaLogo />
 							</Link>
 						</Box>
 						<Box component={'div'} className={'router-box'}>

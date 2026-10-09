@@ -6,6 +6,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import useDeviceDetect from '../hooks/useDeviceDetect';
 import { Stack, Box } from '@mui/material';
 import moment from 'moment';
+import PetoriaLogo from './common/PetoriaLogo';
 
 const Footer = () => {
 	const device = useDeviceDetect();
@@ -17,7 +18,7 @@ const Footer = () => {
 				<Stack className={'main'}>
 					<Stack className={'left'}>
 						<Box component={'div'} className={'footer-box'}>
-							<img src="/img/logo/logoWhite.svg" alt="" className={'logo'} />
+							<PetoriaLogo className={'logo'} />
 						</Box>
 						<Box component={'div'} className={'footer-box'}>
 							<span>{t('total free customer care')}</span>
@@ -75,7 +76,7 @@ const Footer = () => {
 				<Stack className={'main'}>
 					<Stack className={'left'}>
 						<Box component={'div'} className={'footer-box'}>
-							<img src="/img/logo/logoWhite.svg" alt="" className={'logo'} />
+							<PetoriaLogo className={'logo'} />
 						</Box>
 						<Box component={'div'} className={'footer-box'}>
 							<span>{t('total free customer care')}</span>

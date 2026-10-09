@@ -1,0 +1,121 @@
+/** PETORIA LOGO: hover / keyboard-focus animation for libs/components/common/PetoriaLogo.tsx **/
+
+.petoria-logo {
+	display: block;
+	overflow: visible; // the badge grows a little past the viewBox on hover
+
+	.pl-mark,
+	.pl-paw,
+	.pl-toe,
+	.pl-word {
+		transform-box: fill-box;
+	}
+
+	.pl-mark {
+		transform-origin: center;
+		transition: transform 250ms ease-out;
+	}
+
+	.pl-ring {
+		transition: stroke-opacity 250ms ease-out;
+	}
+
+	.pl-paw {
+		transform-origin: 50% 100%;
+	}
+
+	.pl-toe {
+		transform-origin: center;
+	}
+
+	.pl-word {
+		transition: transform 250ms ease-out;
+	}
+}
+
+// hover on the logo itself, or keyboard focus on the link around it
+.petoria-logo:hover,
+a:focus-visible > .petoria-logo {
+	.pl-mark {
+		transform: scale(1.06);
+	}
+
+	.pl-ring {
+		stroke-opacity: 1;
+	}
+
+	.pl-paw {
+		animation: petoria-paw-wiggle 600ms ease-in-out;
+	}
+
+	.pl-toe {
+		animation: petoria-toe-pop 420ms ease-out both;
+	}
+	.pl-toe:nth-of-type(1) {
+		animation-delay: 0ms;
+	}
+	.pl-toe:nth-of-type(2) {
+		animation-delay: 70ms;
+	}
+	.pl-toe:nth-of-type(3) {
+		animation-delay: 140ms;
+	}
+	.pl-toe:nth-of-type(4) {
+		animation-delay: 210ms;
+	}
+
+	.pl-word {
+		transform: translateX(3px);
+	}
+}
+
+@keyframes petoria-paw-wiggle {
+	0% {
+		transform: rotate(0deg);
+	}
+	25% {
+		transform: rotate(-12deg);
+	}
+	50% {
+		transform: rotate(9deg);
+	}
+	75% {
+		transform: rotate(-5deg);
+	}
+	100% {
+		transform: rotate(0deg);
+	}
+}
+
+@keyframes petoria-toe-pop {
+	0% {
+		transform: scale(1);
+	}
+	45% {
+		transform: scale(1.3);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+// keep it calm for visitors who asked for less motion: only the ring brightens
+@include reduced-motion {
+	.petoria-logo .pl-mark,
+	.petoria-logo .pl-word {
+		transition: none;
+	}
+
+	.petoria-logo:hover,
+	a:focus-visible > .petoria-logo {
+		.pl-mark,
+		.pl-word {
+			transform: none;
+		}
+
+		.pl-paw,
+		.pl-toe {
+			animation: none;
+		}
+	}
+}
