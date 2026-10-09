@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { NextPage } from 'next';
 import { Pagination, Stack, Typography } from '@mui/material';
-import useDeviceDetect from '../../hooks/useDeviceDetect';
 import { ProductCard } from '../mypage/ProductCard';
 import { Product } from '../../types/product/product';
 import { ProductsInquiry } from '../../types/product/product.input';
@@ -12,7 +11,6 @@ import { useQuery } from '@apollo/client';
 import { GET_PRODUCTS } from '../../../apollo/user/query';
 
 const MyProducts: NextPage = ({ initialInput, ...props }: any) => {
-	const device = useDeviceDetect();
 	const { t } = useTranslation('common');
 	const router = useRouter();
 	const { memberId } = router.query;
@@ -49,57 +47,53 @@ const MyProducts: NextPage = ({ initialInput, ...props }: any) => {
 		setSearchFilter({ ...searchFilter, page: value });
 	};
 
-	if (device === 'mobile') {
-		return <div>PETORIA PRODUCTS MOBILE</div>;
-	} else {
-		return (
-			<div id="member-products-page">
-				<Stack className="main-title-box">
-					<Stack className="right-box">
-						<Typography className="main-title">{t('Products')}</Typography>
-					</Stack>
+	return (
+		<div id="member-products-page">
+			<Stack className="main-title-box">
+				<Stack className="right-box">
+					<Typography className="main-title">{t('Products')}</Typography>
 				</Stack>
-				<Stack className="products-list-box">
-					<Stack className="list-box">
-						{agentProducts?.length > 0 && (
-							<Stack className="listing-title-box">
-								<Typography className="title-text">{t('Listing title')}</Typography>
-								<Typography className="title-text">{t('Date Published')}</Typography>
-								<Typography className="title-text">{t('Status')}</Typography>
-								<Typography className="title-text">{t('View')}</Typography>
-							</Stack>
-						)}
-						{agentProducts?.length === 0 && (
-							<div className={'no-data'}>
-								<img src="/img/icons/icoAlert.svg" alt="" />
-								<p>{t('No Product found!')}</p>
-							</div>
-						)}
-						{agentProducts?.map((product: Product) => {
-							return <ProductCard product={product} memberPage={true} key={product?._id} />;
-						})}
+			</Stack>
+			<Stack className="products-list-box">
+				<Stack className="list-box">
+					{agentProducts?.length > 0 && (
+						<Stack className="listing-title-box">
+							<Typography className="title-text">{t('Listing title')}</Typography>
+							<Typography className="title-text">{t('Date Published')}</Typography>
+							<Typography className="title-text">{t('Status')}</Typography>
+							<Typography className="title-text">{t('View')}</Typography>
+						</Stack>
+					)}
+					{agentProducts?.length === 0 && (
+						<div className={'no-data'}>
+							<img src="/img/icons/icoAlert.svg" alt="" />
+							<p>{t('No Product found!')}</p>
+						</div>
+					)}
+					{agentProducts?.map((product: Product) => {
+						return <ProductCard product={product} memberPage={true} key={product?._id} />;
+					})}
 
-						{agentProducts.length !== 0 && (
-							<Stack className="pagination-config">
-								<Stack className="pagination-box">
-									<Pagination
-										count={Math.ceil(total / searchFilter.limit)}
-										page={searchFilter.page}
-										shape="circular"
-										color="primary"
-										onChange={paginationHandler}
-									/>
-								</Stack>
-								<Stack className="total-result">
-									<Typography>{t('{{count}} products available', { count: total })}</Typography>
-								</Stack>
+					{agentProducts.length !== 0 && (
+						<Stack className="pagination-config">
+							<Stack className="pagination-box">
+								<Pagination
+									count={Math.ceil(total / searchFilter.limit)}
+									page={searchFilter.page}
+									shape="circular"
+									color="primary"
+									onChange={paginationHandler}
+								/>
 							</Stack>
-						)}
-					</Stack>
+							<Stack className="total-result">
+								<Typography>{t('{{count}} products available', { count: total })}</Typography>
+							</Stack>
+						</Stack>
+					)}
 				</Stack>
-			</div>
-		);
-	}
+			</Stack>
+		</div>
+	);
 };
 
 MyProducts.defaultProps = {

@@ -170,3 +170,43 @@
 		}
 	}
 }
+
+/** followers / followings list: responsive (UI phase F) **/
+#pc-wrap #member-follows-page {
+	.main-title-box .right-box {
+		max-width: 100%;
+	}
+	.follows-list-box {
+		@include laptop {
+			.listing-title-box {
+				gap: $space-6;
+			}
+			.follows-card-box {
+				.info,
+				.details-box,
+				.action-box {
+					flex: 1;
+					min-width: 0;
+					width: auto;
+				}
+			}
+		}
+		@include tablet {
+			.listing-title-box {
+				display: none;
+			}
+			.follows-card-box {
+				flex-wrap: wrap;
+				row-gap: $space-3;
+				.info {
+					flex-basis: 100%;
+					.image-box {
+						width: 72px;
+						height: 72px;
+						margin-right: $space-3;
+					}
+				}
+			}
+		}
+	}
+}

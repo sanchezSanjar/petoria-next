@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { NextPage } from 'next';
 import { Pagination, Stack, Typography } from '@mui/material';
-import useDeviceDetect from '../../hooks/useDeviceDetect';
 import { useRouter } from 'next/router';
 import CommunityCard from '../common/CommunityCard';
 import { T } from '../../types/common';
@@ -15,7 +14,6 @@ import { Messages } from '../../config';
 import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../sweetAlert';
 
 const MemberArticles: NextPage = ({ initialInput, ...props }: any) => {
-	const device = useDeviceDetect();
 	const { t } = useTranslation('common');
 	const router = useRouter();
 	const [total, setTotal] = useState<number>(0);
@@ -72,46 +70,42 @@ const MemberArticles: NextPage = ({ initialInput, ...props }: any) => {
 		}
 	  };
 
-	if (device === 'mobile') {
-		return <div>MEMBER ARTICLES MOBILE</div>;
-	} else {
-		return (
-			<div id="member-articles-page">
-				<Stack className="main-title-box">
-					<Stack className="right-box">
-						<Typography className="main-title">{t('Articles')}</Typography>
-					</Stack>
+	return (
+		<div id="member-articles-page">
+			<Stack className="main-title-box">
+				<Stack className="right-box">
+					<Typography className="main-title">{t('Articles')}</Typography>
 				</Stack>
-				<Stack className="articles-list-box">
-					{memberBoArticles?.length === 0 && (
-						<div className={'no-data'}>
-							<img src="/img/icons/icoAlert.svg" alt="" />
-							<p>{t('No Articles found!')}</p>
-						</div>
-					)}
-					{memberBoArticles?.map((boardArticle: BoardArticle) => {
-						return <CommunityCard boardArticle={boardArticle} key={boardArticle?._id} size={'small'} likeArticleHandler={likeArticleHandler} />;
-					})}
-				</Stack>
-				{memberBoArticles?.length !== 0 && (
-					<Stack className="pagination-config">
-						<Stack className="pagination-box">
-							<Pagination
-								count={Math.ceil(total / searchFilter.limit) || 1}
-								page={searchFilter.page}
-								shape="circular"
-								color="primary"
-								onChange={paginationHandler}
-							/>
-						</Stack>
-						<Stack className="total-result">
-							<Typography>{t('{{count}} articles available', { count: total })}</Typography>
-						</Stack>
-					</Stack>
+			</Stack>
+			<Stack className="articles-list-box">
+				{memberBoArticles?.length === 0 && (
+					<div className={'no-data'}>
+						<img src="/img/icons/icoAlert.svg" alt="" />
+						<p>{t('No Articles found!')}</p>
+					</div>
 				)}
-			</div>
-		);
-	}
+				{memberBoArticles?.map((boardArticle: BoardArticle) => {
+					return <CommunityCard boardArticle={boardArticle} key={boardArticle?._id} size={'small'} likeArticleHandler={likeArticleHandler} />;
+				})}
+			</Stack>
+			{memberBoArticles?.length !== 0 && (
+				<Stack className="pagination-config">
+					<Stack className="pagination-box">
+						<Pagination
+							count={Math.ceil(total / searchFilter.limit) || 1}
+							page={searchFilter.page}
+							shape="circular"
+							color="primary"
+							onChange={paginationHandler}
+						/>
+					</Stack>
+					<Stack className="total-result">
+						<Typography>{t('{{count}} articles available', { count: total })}</Typography>
+					</Stack>
+				</Stack>
+			)}
+		</div>
+	);
 };
 
 MemberArticles.defaultProps = {

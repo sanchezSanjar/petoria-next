@@ -199,3 +199,52 @@
 		}
 	}
 }
+
+/** member page frame: responsive (UI phase F), same layout rules as my page **/
+#pc-wrap #member-page .container .member-page .back-frame {
+	max-width: 100%;
+	box-sizing: border-box;
+	.main-config {
+		flex: 1;
+		min-width: 0;
+		width: auto;
+	}
+	@include laptop {
+		width: 100%;
+		margin: $space-6 0 $space-7;
+		.left-config {
+			flex: 0 0 240px;
+			width: 240px;
+			margin: $space-6 $space-3 $space-6 $space-4;
+			.sections .section .sub-section {
+				width: auto;
+			}
+		}
+		.main-config {
+			margin: $space-6 $space-4 $space-6 0;
+		}
+	}
+	@include tablet {
+		flex-direction: column;
+		.left-config {
+			flex: none;
+			width: auto;
+			height: auto;
+			margin: $space-4;
+			padding-bottom: $space-4;
+			.sections {
+				flex-direction: row;
+				flex-wrap: wrap;
+				gap: $space-5;
+				margin-top: $space-4;
+				padding: 0 $space-4;
+				.section .sub-section {
+					height: auto;
+				}
+			}
+		}
+		.main-config {
+			margin: 0 $space-4 $space-6;
+		}
+	}
+}

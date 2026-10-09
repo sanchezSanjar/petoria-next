@@ -173,3 +173,57 @@
 		}
 	}
 }
+
+/** member products list: responsive (UI phase F), same pattern as my products **/
+#pc-wrap #member-page #member-products-page {
+	.main-title-box .right-box {
+		max-width: 100%;
+	}
+	.products-list-box .list-box {
+		box-sizing: border-box;
+		@include laptop {
+			.listing-title-box {
+				gap: $space-6;
+				.title-text:first-child {
+					margin-right: $space-7;
+				}
+			}
+			.product-card-box {
+				gap: $space-3;
+				.information-box {
+					flex: 1;
+					min-width: 0;
+					width: auto;
+				}
+			}
+		}
+		@include tablet {
+			.listing-title-box {
+				display: none;
+			}
+			.product-card-box {
+				flex-wrap: wrap;
+				align-items: center;
+				row-gap: $space-3;
+				.image-box {
+					width: 90px;
+					margin-right: $space-3;
+				}
+				.information-box {
+					flex: 1 1 160px;
+				}
+				.date-box,
+				.status-box,
+				.views-box {
+					width: auto;
+					height: auto;
+					margin-right: 0;
+				}
+				.date-box {
+					order: 5;
+					flex-basis: 100%;
+				}
+			}
+		}
+	}
+}
