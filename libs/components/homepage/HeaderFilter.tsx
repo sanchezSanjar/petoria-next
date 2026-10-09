@@ -27,6 +27,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 	const productType: ProductType[] = Object.values(ProductType);
 	const productSpecies: ProductSpecies[] = Object.values(ProductSpecies);
 	const productGender: ProductGender[] = Object.values(ProductGender);
+	const isPet = searchFilter?.search?.typeList?.[0] === ProductType.PET;
 
 	/** LIFECYCLES **/
 	useEffect(() => {
@@ -79,12 +80,11 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 	const productTypeSelectHandler = useCallback(
 		async (value: any) => {
 			try {
+				const { genderList, ...search } = searchFilter.search;
 				setSearchFilter({
 					...searchFilter,
-					search: {
-						...searchFilter.search,
-						typeList: [value],
-					},
+					// gender only applies to pets: drop it when another category is picked
+					search: value === ProductType.PET ? { ...search, genderList, typeList: [value] } : { ...search, typeList: [value] },
 				});
 				speciesStateChangeHandler();
 			} catch (err: any) {
@@ -104,7 +104,9 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 						speciesList: [value],
 					},
 				});
-				genderStateChangeHandler();
+				// pets continue to gender; other categories are done after species
+				if (isPet) genderStateChangeHandler();
+				else disableAllStateHandler();
 			} catch (err: any) {
 				console.log('ERROR, productSpeciesSelectHandler:', err);
 			}
@@ -167,10 +169,12 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 						<span>{searchFilter?.search?.speciesList ? t(searchFilter?.search?.speciesList[0]) : t('Species')}</span>
 						<ExpandMoreIcon />
 					</Box>
-					<Box component={'div'} className={`box ${openGender ? 'on' : ''}`} onClick={genderStateChangeHandler}>
-						<span>{searchFilter?.search?.genderList ? t(searchFilter?.search?.genderList[0]) : t('Gender')}</span>
-						<ExpandMoreIcon />
-					</Box>
+					{isPet && (
+						<Box component={'div'} className={`box ${openGender ? 'on' : ''}`} onClick={genderStateChangeHandler}>
+							<span>{searchFilter?.search?.genderList ? t(searchFilter?.search?.genderList[0]) : t('Gender')}</span>
+							<ExpandMoreIcon />
+						</Box>
+					)}
 				</Stack>
 				<Stack className={'search-box-other'}>
 					<Box component={'div'} className={'search-btn'} onClick={pushSearchHandler}>
@@ -195,13 +199,15 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 					))}
 				</div>
 
-				<div className={`filter-rooms ${openGender ? 'on' : ''}`} ref={genderRef}>
-					{productGender.map((gender: string) => (
-						<span onClick={() => productGenderSelectHandler(gender)} key={gender}>
-							{t(gender)}
-						</span>
-					))}
-				</div>
+				{isPet && (
+					<div className={`filter-rooms ${openGender ? 'on' : ''}`} ref={genderRef}>
+						{productGender.map((gender: string) => (
+							<span onClick={() => productGenderSelectHandler(gender)} key={gender}>
+								{t(gender)}
+							</span>
+						))}
+					</div>
+				)}
 			</Stack>
 		);
 	}
