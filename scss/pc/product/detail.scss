@@ -754,3 +754,130 @@
 		}
 	}
 }
+
+/** product detail: fluid columns + responsive layout **/
+#pc-wrap #product-detail-page .product-detail-config {
+	.product-desc-config {
+		.left-config {
+			flex: 1;
+			min-width: 0;
+			width: auto;
+			.options-config {
+				flex-wrap: wrap;
+				row-gap: $space-4;
+			}
+		}
+		.right-config {
+			flex: 0 0 318px;
+			box-sizing: border-box;
+		}
+	}
+
+	@include laptop {
+		.product-desc-config .left-config .options-config {
+			gap: $space-5;
+		}
+		.product-desc-config .left-config .prop-desc-config .bottom .info-box {
+			gap: $space-7;
+		}
+	}
+
+	@include tablet {
+		.product-info-config .images .main-image {
+			height: 420px;
+		}
+		.product-desc-config {
+			flex-direction: column;
+			.right-config {
+				flex-basis: auto;
+				width: 100%;
+			}
+		}
+		.similar-products-config .cards-box .similar-homes-swiper .similar-homes-slide {
+			width: 320px;
+		}
+	}
+
+	@include mobile {
+		gap: $space-5;
+		.product-info-config {
+			gap: $space-4;
+			.info {
+				flex-direction: column;
+				gap: $space-3;
+				.left-box {
+					width: 100%;
+				}
+				.right-box {
+					align-items: flex-start;
+				}
+			}
+			.images {
+				.main-image {
+					height: 260px;
+				}
+				.sub-images {
+					flex-wrap: wrap;
+					.sub-img-box {
+						width: 72px;
+						height: 72px;
+					}
+				}
+			}
+		}
+		.product-desc-config .left-config {
+			gap: $space-5;
+			.options-config {
+				gap: $space-4;
+			}
+			.prop-desc-config {
+				gap: $space-5;
+				.top {
+					// keeps its own column layout (not the header row)
+					height: auto;
+					flex-direction: column;
+				}
+				.bottom .info-box {
+					flex-direction: column;
+					gap: 0;
+					.left .info .title,
+					.right .info .title {
+						width: 110px;
+					}
+					.left .info .data,
+					.right .info .data {
+						width: auto;
+					}
+				}
+			}
+			.address-config .map-box {
+				height: 260px;
+			}
+		}
+		.similar-products-config {
+			gap: $space-5;
+			.title-pagination-box {
+				flex-wrap: wrap;
+				gap: $space-3;
+				.title-box {
+					width: 100%;
+					.main-title {
+						font-size: 24px;
+					}
+				}
+			}
+			.cards-box .similar-homes-swiper .similar-homes-slide {
+				width: 280px;
+			}
+		}
+	}
+}
+
+// similar products: the 410px ProductBigCard follows the (narrower) slide width on tablets and phones
+#pc-wrap #product-detail-page .similar-products-config .cards-box .similar-homes-slide .product-big-card-box {
+	@include tablet {
+		width: auto;
+		margin-left: 0;
+		margin-right: 0;
+	}
+}

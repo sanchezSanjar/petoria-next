@@ -3,7 +3,8 @@
 
 // phones render the same #pc-wrap as desktop, with the .mobile class (see the layouts)
 #pc-wrap.mobile {
-  .top {
+  // mobile header row only (Top.tsx renders it inside #top); other components also use a .top class
+  #top .top {
     height: 100px;
     display: flex;
     flex-direction: row;

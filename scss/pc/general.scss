@@ -115,6 +115,28 @@
 			flex-direction: row;
 			justify-content: space-between;
 			align-items: center;
+			.status-box {
+				width: auto; // the generic 65px div width is too narrow for longer translations
+			}
+			p.card-status {
+				display: flex;
+				align-items: center;
+				gap: 6px;
+				font-weight: 600;
+				&::before {
+					content: '';
+					width: 8px;
+					height: 8px;
+					border-radius: 50%;
+					background: currentColor;
+				}
+				&.available {
+					color: $color-success;
+				}
+				&.sold {
+					color: $color-muted;
+				}
+			}
 			div {
 				width: 65px;
 				display: flex;
