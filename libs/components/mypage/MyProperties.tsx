@@ -99,7 +99,7 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
 	}, [user?._id, user?.memberType]);
 
 	if (device === 'mobile') {
-		return <div>NESTAR PROPERTIES MOBILE</div>;
+		return <div>PETORIA PROPERTIES MOBILE</div>;
 	} else {
 		return (
 			<div id="my-property-page">

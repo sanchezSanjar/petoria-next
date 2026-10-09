@@ -65,7 +65,7 @@ const Footer = () => {
 					</Stack>
 				</Stack>
 				<Stack className={'second'}>
-					<span>{t('© Nestar - All rights reserved. Nestar {{year}}', { year: moment().year() })}</span>
+					<span>{t('© Petoria - All rights reserved. Petoria {{year}}', { year: moment().year() })}</span>
 				</Stack>
 			</Stack>
 		);
@@ -130,7 +130,7 @@ const Footer = () => {
 					</Stack>
 				</Stack>
 				<Stack className={'second'}>
-					<span>{t('© Nestar - All rights reserved. Nestar {{year}}', { year: moment().year() })}</span>
+					<span>{t('© Petoria - All rights reserved. Petoria {{year}}', { year: moment().year() })}</span>
 					<span>{t('Privacy · Terms · Sitemap')}</span>
 				</Stack>
 			</Stack>

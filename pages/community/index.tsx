@@ -126,7 +126,7 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 								<Stack className={'image-info'}>
 									<img src={'/img/logo/logoText.svg'} />
 									<Stack className={'community-name'}>
-										<Typography className={'name'}>{t('Nestar Community')}</Typography>
+										<Typography className={'name'}>{t('Petoria Community')}</Typography>
 									</Stack>
 								</Stack>
 
