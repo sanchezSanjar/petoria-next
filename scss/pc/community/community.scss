@@ -184,3 +184,27 @@
 		}
 	}
 }
+
+/** community list: responsive (UI phase F) **/
+#pc-wrap #community-list-page .container .main-box {
+	.right-config {
+		flex: 1;
+		min-width: 0;
+	}
+	@include tablet {
+		flex-direction: column;
+		.left-config {
+			width: 100%;
+		}
+	}
+	@include mobile {
+		.right-config .panel-config .title-box {
+			flex-wrap: wrap;
+			gap: $space-3;
+			margin-bottom: $space-5;
+			.left {
+				width: 100%;
+			}
+		}
+	}
+}

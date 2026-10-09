@@ -439,3 +439,29 @@
 		}
 	}
 }
+
+/** community article detail: responsive (UI phase F) **/
+#pc-wrap #community-detail-page .container .main-box {
+	.community-detail-config {
+		flex: 1;
+		min-width: 0;
+		.config .first-box-config,
+		.config .second-box-config {
+			width: 100%;
+			max-width: 1012px;
+			box-sizing: border-box;
+		}
+	}
+	@include tablet {
+		flex-direction: column;
+		.left-config {
+			width: 100%;
+		}
+	}
+	@include mobile {
+		.community-detail-config .title-box {
+			flex-wrap: wrap;
+			gap: $space-3;
+		}
+	}
+}
